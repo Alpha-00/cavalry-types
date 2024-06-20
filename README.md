@@ -1,5 +1,19 @@
 # cavalry-types
 
+## Disclaimer
+
+This is an unofficial folk project created for personal use only. It is not affiliated with, endorsed by, or supported by Scenery in any way.
+
+### Use at Your Own Risk
+
+While I have strived to make this code functional, I cannot guarantee its compatibility with all Scenery versions or its suitability for any specific purpose. You are solely responsible for any risks or damages arising from its use.
+
+### No Support
+
+Please note that I am not obligated to provide any support or assistance for this code.
+
+## Overview
+
 Typescript definitions for [Cavalry](https://docs.cavalry.scenegroup.co/tech-info/scripting/getting-started/)
 
 > [!NOTE]
