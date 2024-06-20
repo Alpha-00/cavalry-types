@@ -85,9 +85,10 @@ declare namespace api {
 	/**
 	 * Start playback.
 	 * 
+	 * **This function cannot stop the playback**
+	 * 
 	 * @example
 	 * api.play();
-	 *
 	 */
 	function play(): void
 
@@ -391,7 +392,7 @@ declare namespace api {
 		
 	// TODO: Conflict with official documentation
 	/**
-	 * TODO: Description
+	 * Return all the Layers in the active Composition of a certain type.
 	 *
 	 * @param topLevel Only return layers in the top level Only
 	 * @param type Layer's type need to be selected
@@ -405,6 +406,8 @@ declare namespace api {
 	 * for (let layer of nulls) {
 	 *   console.log(api.getNiceName(layer));
 	 * }
+	 * // Prints:
+	 * // ["null#1",]
 	 */
 	function getCompLayersOfType(topLevel: boolean, type: LayerType): string[]
 
@@ -588,6 +591,7 @@ declare namespace api {
 	 * api.create("null", "My Null");
 	 */
 	// TODO: Define allowed values for `layerType`
+	// TODO: Notice user that when type string out of LayerType, the program crash completely
 	function create(layerType: string, name?: string): string
 
 	/**
