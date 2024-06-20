@@ -431,10 +431,22 @@ declare namespace api {
 	 *   console.log(api.getNiceName(layer));
 	 * }
 	 * // Prints:
-	 * // ["null#1",]
+	 * // ["null#1","null#2","group#3","spreadsheet#4"]
 	 */
 	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerId[]
-
+		
+	/**
+	 * A unique identifier for a Time Marker.
+	 * 
+	 * Similar to LayerId but only have one type of "timeMarker"
+	 * 
+	 * @example
+	 * "timeMarker#1"
+	 * 
+	 * @see {@link LayerId} for more description
+	 */
+	type TimeMarkerId = `timeMarker#${number}${number | ''}${number | ''}`;
+	
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
 	 * controller for a Scheduling Group.
