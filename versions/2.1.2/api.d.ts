@@ -433,7 +433,7 @@ declare namespace api {
 	 * // Prints:
 	 * // ["null#1",]
 	 */
-	function getCompLayersOfType(topLevel: boolean, type: LayerType): string[]
+	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerId[]
 
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
