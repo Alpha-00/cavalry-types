@@ -21,7 +21,19 @@ type float = number
 // # Working with the Composition
 
 /**
- * TODO: Description
+ * # API Module
+ * 
+ * The API Module provides functions for interacting with Cavalry elements (Scenes, Compositions, Layers, etc.).
+ * It allows for modifying properties, rendering scenes, creating projects, and more.
+ * Additionally, it supports file I/O, clipboard access, web interactions, and running shell commands.
+ * 
+ * **Available only in the JavaScript Editor, not the JavaScript Utility.**
+ * 
+ * @example
+ * ```ts
+ * //All commands require the "api." prefix 
+ * api.create("null", "My Null");
+ * ```
  */
 declare namespace api {
 	/**
