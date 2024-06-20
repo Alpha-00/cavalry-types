@@ -114,6 +114,7 @@ declare namespace api {
 	function getCompLayers(topLevel: boolean): string[]
 
 	// TODO: Check the number of layer type and double check with the documentation
+	// TODO: Add format of layer ID
 	/**
 	 * Using for create or sort layer
 	 * 
@@ -405,7 +406,7 @@ declare namespace api {
 	 *   console.log(api.getNiceName(layer));
 	 * }
 	 */
-	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerType[]
+	function getCompLayersOfType(topLevel: boolean, type: LayerType): string[]
 
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
