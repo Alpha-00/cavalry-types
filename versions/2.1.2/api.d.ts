@@ -1,3 +1,4 @@
+// TODO Document #region for collapsable sections
 type integer = number
 type float = number
 
@@ -92,30 +93,7 @@ declare namespace api {
 	 */
 	function play(): void
 
-	/**
-	 * Return all the Layers in the active Composition of a certain type.
-	 * 
-	 * @param topLevel Only return layers in the top level
-	 *
-	 * @returns {string[]} - A list of name of Layers
-	 * 
-	 * @example
-	 * const primId = api.primitive("polygon", "My Polygon");
-	 * const nullId = api.create("null", "My Null");
-	 * api.parent(primId, nullId);
-	 * // The boolean indicates top level layers only (ie. ignore all children)
-	 * const topLevelIds = api.getCompLayers(false);
-	 * // Prints: 1
-	 * console.log(topLevelIds.length)
-	 * // Get all the layers in the composition
-	 * const allIds = api.getCompLayers(true);
-	 * // Prints: 2
-	 * console.log(allIds.length)
-	 */
-	function getCompLayers(topLevel: boolean): string[]
-
 	// TODO: Check the number of layer type and double check with the documentation
-	// TODO: Add format of layer ID
 	/**
 	 * Using for create or sort layer
 	 * 
@@ -390,6 +368,52 @@ declare namespace api {
 	| "voxelizeDistribution"
 	| "wave"	
 		
+	/**
+	 * 
+	 * A unique identifier for a layer as a string.
+	 * 
+	 * It helps manage the scene and used in many functions. 
+	 * 
+	 * **Format:**
+	 * 
+	 * `${LayerType}#${number}`
+	 * 
+	 * - `LayerType`: A string representing the type of layer (e.g., "null", "group", "addDivisions").
+	 * - `number`: An integer between 0 and 999 representing the layer's specific instance within its type.
+	 * 
+	 * **Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).**
+	 * 
+	 * @example
+	 * - "null#1"
+	 * - "group#13"
+	 * - "addDivisions#789"
+	 * 
+	 */
+	type LayerId = `${LayerType}#${number}${number | ''}${number | ''}`;
+
+	/**
+	 * Return all the Layers in the active Composition of a certain type.
+	 * 
+	 * @param topLevel Only return layers in the top level
+	 *
+	 * @returns {string[]} - A list of name of Layers
+	 * 
+	 * @example
+	 * const primId = api.primitive("polygon", "My Polygon");
+	 * const nullId = api.create("null", "My Null");
+	 * api.parent(primId, nullId);
+	 * // The boolean indicates top level layers only (ie. ignore all children)
+	 * const topLevelIds = api.getCompLayers(false);
+	 * // Prints: 1
+	 * console.log(topLevelIds.length)
+	 * // Get all the layers in the composition
+	 * const allIds = api.getCompLayers(true);
+	 * // Prints: 2
+	 * console.log(allIds.length)
+	 */
+	function getCompLayers(topLevel: boolean): LayerId[]
+
+
 	// TODO: Conflict with official documentation
 	/**
 	 * Return all the Layers in the active Composition of a certain type.
