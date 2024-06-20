@@ -34,6 +34,23 @@ type float = number
  * //All commands require the "api." prefix 
  * api.create("null", "My Null");
  * ```
+ * 
+ * @see 
+ * **Offical Documenation**
+ * 
+ * - [Cavalry Official Documentation of API Module](https://docs.cavalry.scenegroup.co/tech-info/scripting/api-module/)
+ * 
+ * @see 
+ * **Other Modules**
+ * TODO: Check the relate modules, only keep usable modules in the Javascript Editor.
+ * TODO: Check the real modules list  
+ * - [Browser Module](browser.d.ts)
+ * - [Cavalry Module](cavalry.d.ts)
+ * - [Context Module](ctx.d.ts)
+ * - [Index Module](index.d.ts)
+ * - [Render Module](render.d.ts)
+ * - [UI Module](ui.d.ts)
+ * 
  */
 declare namespace api {
 	/**
@@ -64,14 +81,13 @@ declare namespace api {
 	 */
 	function getFrame(): integer
 
-	// api.setFrame(100);
-	// console.log(api.getFrame());
-
 	/**
 	 * Start playback.
 	 * 
 	 * @example
 	 * api.play();
+	 * 
+	 * TODO: Do not have stop function yet
 	 */
 	function play(): void
 
