@@ -447,6 +447,7 @@ declare namespace api {
 	 */
 	type TimeMarkerId = `timeMarker#${number}${number | ''}${number | ''}`;
 
+	// TODO: Conflix with official doc
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
 	 * controller for a Scheduling Group.
@@ -468,7 +469,7 @@ declare namespace api {
 	 * api.set(markerId, { "label": "Hello, World", "drawColor": "Pink", "useRelPlacement": true });
 	 * api.connect(markerId, "id", scheduleGroup, "childOffset");
 	 */
-	function createTimeMarker(time: integer): string
+	function createTimeMarker(time: integer): TimeMarkerId
 
 	/**
 	 * Returns a list of all the Time Marker Ids in this Composition
