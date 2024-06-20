@@ -514,6 +514,8 @@ declare namespace api {
 	 * beat falls on.
 	 *
 	 * @param beat Number of the beat
+	 * 
+	 * @returns `integer` - The frame of the beat
 	 *
 	 * @example
 	 * const frame = api.getNthBeat(3);
