@@ -368,6 +368,7 @@ declare namespace api {
 	| "voxelizeDistribution"
 	| "wave"	
 		
+	// TODO: Limit of TypeScript to define id number: Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).
 	/**
 	 * 
 	 * A unique identifier for a layer as a string.
@@ -379,9 +380,7 @@ declare namespace api {
 	 * `${LayerType}#${number}`
 	 * 
 	 * - `LayerType`: A string representing the type of layer (e.g., "null", "group", "addDivisions").
-	 * - `number`: An integer between 0 and 999 representing the layer's specific instance within its type.
-	 * 
-	 * **Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).**
+	 * - `number`: An integer representing the layer's specific instance within its type.
 	 * 
 	 * @example
 	 * - "null#1"
@@ -435,6 +434,7 @@ declare namespace api {
 	 */
 	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerId[]
 		
+	// TODO: Limit of TypeScript to define id number
 	/**
 	 * A unique identifier for a Time Marker.
 	 * 
@@ -446,7 +446,7 @@ declare namespace api {
 	 * @see {@link LayerId} for more description
 	 */
 	type TimeMarkerId = `timeMarker#${number}${number | ''}${number | ''}`;
-	
+
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
 	 * controller for a Scheduling Group.
