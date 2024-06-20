@@ -71,7 +71,7 @@ declare namespace api {
 	/**
 	 * Return the frame number the playhead is on.
 	 * 
-	 * @returns {integer}
+	 * @returns `integer` - The current frame number
 	 * 
 	 * @example
 	 * // Move the playhead to frame 50 and then print that frame number to the message bar
@@ -395,7 +395,7 @@ declare namespace api {
 	 * 
 	 * @param topLevel Only return layers in the top level
 	 *
-	 * @returns {string[]} - A list of name of Layers
+	 * @returns `LayerId[]` - A list of name of Layers
 	 * 
 	 * @example
 	 * const primId = api.primitive("polygon", "My Polygon");
@@ -419,6 +419,8 @@ declare namespace api {
 	 *
 	 * @param topLevel Only return layers in the top level Only
 	 * @param type Layer's type need to be selected
+	 * 
+	 * @returns `LayerId[]` - A list of name of Layers
 	 *
 	 * @example
 	 * api.create("null", "My Null");
@@ -454,7 +456,7 @@ declare namespace api {
 	 *
 	 * @param time - Specific frame in the timeline
 	 *
-	 * @returns The marker ID
+	 * @returns `TimeMarkerId` The marker ID name
 	 *
 	 * @example
 	 * const markerId = api.createTimeMarker(10);
@@ -468,11 +470,15 @@ declare namespace api {
 	 * const markerId = api.createTimeMarker(10);
 	 * api.set(markerId, { "label": "Hello, World", "drawColor": "Pink", "useRelPlacement": true });
 	 * api.connect(markerId, "id", scheduleGroup, "childOffset");
+	 * 
+	 * @see {@link TimeMarkerId} for proper definition
 	 */
 	function createTimeMarker(time: integer): TimeMarkerId
 
 	/**
 	 * Returns a list of all the Time Marker Ids in this Composition
+	 * 
+	 * @returns `TimeMarkerId[]` - A list of name of Time Markers
 	 *
 	 * @example
 	 * api.createTimeMarker(10);
@@ -481,8 +487,12 @@ declare namespace api {
 	 * for (let markerId of markers) {
 	 *   console.log(markerId)
 	 * }
+	 * // Prints:
+	 * // ["timeMarker#1","timeMarker#2"]
+	 * 
+	 * @see {@link TimeMarkerId} for proper definition
 	 */
-	function getTimeMarkers(): string[]
+	function getTimeMarkers(): TimeMarkerId[]
 
 	/**
 	 * A convenience function for removing Time Markers. This forwards to
