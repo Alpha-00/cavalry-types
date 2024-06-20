@@ -499,8 +499,14 @@ declare namespace api {
 	 * `api.delete(layerId)`.
 	 *
 	 * @param markerId ID of the marker to be removed
+	 * 
+	 * @example
+	 * var timeMarkerId = api.createTimeMarker(10);
+	 * api.removeTimeMarker(timeMarkerId);
+	 * 
+	 * @see {@link TimeMarkerId} for proper definition
 	 */
-	function removeTimeMarker(markerId: string): void
+	function removeTimeMarker(markerId: TimeMarkerId): void
 
 	/**
 	 * Return the frame of the 'n'th beat from the Beat Marker settings. For
