@@ -133,7 +133,7 @@ declare namespace api {
 	 * 4. Effects
 	 * Effects include Shaders and image based Filters. 
 	 */
-	type LayerTypes =
+	type LayerType =
 	| "3dMatrix"
 	| "accumulator"
 	| "addDivisions"
@@ -388,6 +388,7 @@ declare namespace api {
 	| "voxelizeDistribution"
 	| "wave"	
 		
+	// TODO: Conflix with official documentation
 	/**
 	 * TODO: Description
 	 *
@@ -404,7 +405,7 @@ declare namespace api {
 	 *   console.log(api.getNiceName(layer));
 	 * }
 	 */
-	function getCompLayersOfType(topLevel: boolean, type: LayerTypes): LayerTypes[]
+	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerType[]
 
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
