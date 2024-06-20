@@ -524,6 +524,13 @@ declare namespace api {
 	function getNthBeat(beat: integer): integer
 
 	/**
+	 * The unique identifier for a composition.
+	 * 
+	 * @see {@link LayerId} for more description
+	 */
+	type CompositionId = `compNode#${number}${number|''}${number|''}`
+	
+	/**
 	 * Add a Ruler Guide to the given Composition. This function returns an id
 	 * which can be used to delete the Guide later.
 	 *
