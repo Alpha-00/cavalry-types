@@ -81,13 +81,13 @@ declare namespace api {
 	 */
 	function getFrame(): integer
 
+	// TODO: Do not have stop function yet
 	/**
 	 * Start playback.
 	 * 
 	 * @example
 	 * api.play();
-	 * 
-	 * TODO: Do not have stop function yet
+	 *
 	 */
 	function play(): void
 
@@ -392,7 +392,7 @@ declare namespace api {
 	 * TODO: Description
 	 *
 	 * @param topLevel Only return layers in the top level Only
-	 * @param type Type of layer
+	 * @param type Layer's type need to be selected
 	 *
 	 * @example
 	 * api.create("null", "My Null");
@@ -404,7 +404,7 @@ declare namespace api {
 	 *   console.log(api.getNiceName(layer));
 	 * }
 	 */
-	function getCompLayersOfType(topLevel: boolean, type: string): string[]
+	function getCompLayersOfType(topLevel: boolean, type: LayerTypes): LayerTypes[]
 
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
