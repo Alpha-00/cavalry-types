@@ -452,7 +452,7 @@ declare namespace api {
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
 	 * controller for a Scheduling Group.
 	 *
-	 * @param time
+	 * @param time - Specific frame in the timeline
 	 *
 	 * @returns The marker ID
 	 *
