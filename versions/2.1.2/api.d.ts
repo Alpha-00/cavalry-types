@@ -388,7 +388,7 @@ declare namespace api {
 	| "voxelizeDistribution"
 	| "wave"	
 		
-	// TODO: Conflix with official documentation
+	// TODO: Conflict with official documentation
 	/**
 	 * TODO: Description
 	 *
