@@ -1019,20 +1019,103 @@ declare namespace api {
 	function hasFill(layerId: LayerId): boolean
 
 	/**
+	 * Standard point position object with x and y values
+	 */
+	type Point2dInfo = {
+		/** 
+		 * Horizontal position of the point. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		x: float;
+
+		/** 
+		 * Vertical position of the point. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		y: float;
+	}
+	
+	/**
+	 * Information of a Bounding Box
+	 * 
+	 * Maybe global or local bounding box
+	 */
+	type BoundingBoxInfo = { 
+		/** 
+		 * Starting horizontal position of the box. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		x: float; 
+		
+		/** 
+		 * Starting vertical position of the box. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		y: float; 
+
+		/** 
+		 * Width scale of the box from `x`. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		width: float;
+
+		/** 
+		 * Height scale of the box from `y`. 
+		 * 
+		 * The center of the canvas is 0, left is negative and right is positive value.
+		 */
+		height: float;
+
+		/** 
+		 * Center point of the box.
+		 * 
+		 * **It's usually different from the layer `x` and `y` position**
+		 */
+		centre: Point2dInfo
+
+		/** 
+		 * Starting horizontal position of the box. 
+		 * 
+		 * **Same as `x`**
+		 */
+		left: float;
+
+		/** 
+		 * Ending horizontal position of the box.
+		 */
+		right: float;
+
+		/** 
+		 * Starting vertical position of the box. 
+		 * 
+		 * **Same as `y`**
+		 */
+		top: float;
+
+		/** 
+		 * Ending vertical position of the box.
+		 */
+		bottom: float;
+	}
+
+	/**
 	 * Gets the bounding box of the specified layer.
 	 *
 	 * @param layerId ID of the layer
 	 * @param worldSpace Get bounding box in world space
-	 *
+	 * @returns `BoundingBoxInfo` object of the box, include x, y, width, height, center, top, bottom, left, right
+	 * 
 	 * @example
 	 * const primId = api.primitive("polygon", "My Polygon");
 	 * const bbox = api.getBoundingBox(primId, true);
 	 * console.log(JSON.stringify(bbox));
 	 */
-	function getBoundingBox(
-		layerId: LayerId,
-		worldSpace: boolean
-	): { x: float; y: float; width: float; height: float }
+	function getBoundingBox(layerId: LayerId, worldSpace: boolean): BoundingBoxInfo
 
 	// # Working with Attributes
 
