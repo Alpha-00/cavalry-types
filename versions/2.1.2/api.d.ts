@@ -581,6 +581,27 @@ declare namespace api {
 	function clearGuides(compId: CompositionId): void
 
 	/**
+	 * Information about Ruler Guide, include Id, Direction and Position
+	 */
+	type GuideInfo = {
+		/** 
+		 * Id of the guide
+		 * 
+		 * Starting from 1 
+		 */
+		id: integer
+		/**
+		 * Direction of the guide
+		 * - 0 for Horizontal Guides
+		 * - 1 for Vertical Guides
+		 */
+		direction: 0 | 1
+		/** 
+		 * Position of the guide in pixel
+		 */
+		position: integer
+	}
+	/**
 	 * Get the Ids of all the Ruler Guides in the given Composition.
 	 *
 	 * Direction returns:
@@ -596,9 +617,7 @@ declare namespace api {
 	 * const guideInfo = api.getGuideInfo()
 	 * console.log(JSON.stringify(guideInfo));
 	 */
-	function getGuideInfo(
-		compId: string
-	): { id: integer; direction: 0 | 1; position: integer }[]
+	function getGuideInfo(compId: CompositionId): GuideInfo[]
 
 	type Primitive =
 		| 'rectangle'
