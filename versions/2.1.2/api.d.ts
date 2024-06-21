@@ -896,11 +896,13 @@ declare namespace api {
 	 * api.parent(primId, nullId);
 	 */
 	function parent(layerId: LayerId, newParentId: LayerId): void
-
+	
 	/**
 	 * Return the `layerId` of a Layer's parent.
 	 *
 	 * @param layerId ID of the layer
+	 * @returns `LayerId` - ID of the layer's parent.
+	 * Return empty string `""` when layer have no parent.
 	 *
 	 * @example
 	 * const primId = api.primitive("polygon", "My Polygon");
@@ -908,7 +910,7 @@ declare namespace api {
 	 * api.parent(primId, nullId);
 	 * console.log(api.getParent(primId));
 	 */
-	function getParent(layerId: LayerId): string
+	function getParent(layerId: LayerId): LayerId
 
 	/**
 	 * Return the human-readable ('nice name') of a Layer.
