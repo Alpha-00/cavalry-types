@@ -3,6 +3,7 @@
 type integer = number
 type float = number
 
+// TODO: Change all example to codeblock of typescript for better markdown support ```typescript```
 // TODO: Document @returns
 // The following APIs are all in the api namespace. They are ONLY available in the JavaScript Editor and not available when writing expressions in the JavaScript Utility.
 // All commands in this namespace must be prefixed with api. e.g `api.create("null", "My Null")`;
@@ -1123,6 +1124,7 @@ declare namespace api {
 	 * @returns `BoundingBoxInfo` object of the box, include x, y, width, height, center, top, bottom, left, right
 	 * 
 	 * @example
+	 * ```typescript
 	 * const shape1 = api.create("basicShape");
 	 * api.set(shape1, {"position": [450, -120]});
 	 * const shape2 = api.create("basicShape");
@@ -1130,9 +1132,10 @@ declare namespace api {
 	 * api.select([shape1, shape2]);
 	 * let bbox = api.getSelectionBoundingBox();
 	 * console.log(JSON.stringify(bbox));
+	 * ```
 	 */
 	function getSelectionBoundingBox(): BoundingBoxInfo
-	
+
 	/* #endRegion */
 
 	/* #region | MARK: Working with Attributes */
