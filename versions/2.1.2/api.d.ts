@@ -368,7 +368,7 @@ declare namespace api {
 	| "voxelize"
 	| "voxelizeDistribution"
 	| "wave"
-	| Primitive
+	| PrimitiveType
 		
 	// TODO: Limit of TypeScript to define id number: Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).
 	/**
@@ -704,8 +704,10 @@ declare namespace api {
 	 * The type of the primitive shape.
 	 * 
 	 * These can become generative layers for multiple shapes.
+	 * 
+	 * There is currently 11 types of primitive generator
 	 */
-	type Primitive =
+	type PrimitiveType =
 		| 'rectangle'
 		| 'ellipse'
 		| 'polygon'
@@ -730,7 +732,7 @@ declare namespace api {
 	 * const primId = api.primitive("rectangle", "My Rectangle");
 	 * console.log(primId)
 	 */
-	function primitive(type: Primitive, name: string): LayerId
+	function primitive(type: PrimitiveType, name: string): LayerId
 
 	/**
 	 * Creates and Editable Shape from a Path
