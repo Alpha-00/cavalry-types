@@ -22,6 +22,8 @@ type float = number
 
 // # Working with the Composition
 
+// TODO: Check the relate modules, only keep usable modules in the Javascript Editor.
+// TODO: Check the real modules list  
 /**
  * # API Module
  * 
@@ -44,8 +46,6 @@ type float = number
  * 
  * @see 
  * **Other Modules**
- * TODO: Check the relate modules, only keep usable modules in the Javascript Editor.
- * TODO: Check the real modules list  
  * - [Browser Module](browser.d.ts)
  * - [Cavalry Module](cavalry.d.ts)
  * - [Context Module](ctx.d.ts)
