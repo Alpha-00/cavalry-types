@@ -883,7 +883,7 @@ declare namespace api {
 	 * console.log(childIds.length)
 	 */
 	function getChildren(layerId: LayerId): LayerId[]
-
+	
 	/**
 	 * Make one Layer the child of another.
 	 *
@@ -896,6 +896,18 @@ declare namespace api {
 	 * api.parent(primId, nullId);
 	 */
 	function parent(layerId: LayerId, newParentId: LayerId): void
+	
+	/**
+	 * Move a layer up one level of hierarchy to its parent's parent. 
+	 * 
+	 * This is the equivalent of the Un-Parent context menu item available in the Scene Tree.
+	 * 
+	 * @param layerId 
+	 * 
+	 * @example
+	 * api.unParent("basicShape#1");
+	 */
+	function unParent(layerId: LayerId): void
 	
 	/**
 	 * Return the `layerId` of a Layer's parent.
