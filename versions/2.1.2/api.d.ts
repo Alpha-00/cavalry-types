@@ -908,7 +908,7 @@ declare namespace api {
 	 * api.unParent("basicShape#1");
 	 */
 	function unParent(layerId: LayerId): void
-	
+
 	/**
 	 * Return the `layerId` of a Layer's parent.
 	 *
@@ -926,12 +926,17 @@ declare namespace api {
 
 	/**
 	 * Return the human-readable ('nice name') of a Layer.
+	 * 
+	 * This is also the name display in the Scene Tree.
 	 *
 	 * @param layerId ID of the layer
+	 * @returns `string` - custom name of the layer
 	 *
 	 * @example
 	 * const nullId = api.create("null", "My Null");
 	 * console.log(api.getNiceName(nullId));
+	 * 
+	 * @see {@link getCompLayers} to get all Ids of a scene
 	 */
 	function getNiceName(layerId: LayerId): string
 
