@@ -728,7 +728,7 @@ declare namespace api {
 	 * Creates a Primitive Shape
 	 *
 	 * @param type Layer type
-	 * @param name Preferred name of the new layer
+	 * @param name Preferred 'nice name' of the new layer
 	 *
 	 * @example
 	 * // Returns the layerId for the new shape
@@ -752,21 +752,21 @@ declare namespace api {
 	 * path.close();
 	 * api.createEditable(path, "My Path");
 	 */
-	function createEditable(path: cavalry.Path, name: string): string
+	function createEditable(path: cavalry.Path, name: string): LayerId
 
 	/**
 	 * Creates a Layer of any type. The optional `name` argument specifies the
 	 * name of the Layer in the Scene Window.
+	 * 
+	 * **Crashes if layerType is invalid.**
 	 *
 	 * @param layerType Layer type
-	 * @param name Preferred name of the new layer
+	 * @param name (optional) Preferred name of the new layer
 	 *
 	 * @example
 	 * api.create("null", "My Null");
 	 */
-	// TODO: Define allowed values for `layerType`
-	// TODO: Notice user that when type string out of LayerType, the program crash completely
-	function create(layerType: string, name?: string): string
+	function create(layerType: LayerType, name?: string): string
 
 	/**
 	 * Delete a Layer.
@@ -780,7 +780,7 @@ declare namespace api {
 	 *   api.deleteLayer(layer);
 	 * }
 	 */
-	function deleteLayer(layerId: string): void
+	function deleteLayer(layerId: LayerId): void
 
 	/**
 	 * Check if a layer with the given `layerId` exists.
@@ -792,7 +792,7 @@ declare namespace api {
 	 * console.log(`Layer exists: ${api.layerExists(layerId)}.`);
 	 * console.log(`Active Comp exists: ${api.layerExists(api.getActiveComp())}`);
 	 */
-	function layerExists(layerId: string): boolean
+	function layerExists(layerId: LayerId): boolean
 
 	/**
 	 * Get the layer's type (which can be used to create new instances of this
@@ -804,14 +804,14 @@ declare namespace api {
 	 * const layerId = api.create("null", "My Null");
 	 * console.log(api.getLayerType(layerId));
 	 */
-	function getLayerType(layerId: string): string
+	function getLayerType(layerId: LayerId): string
 
 	/**
 	 * Reset all Attributes on a layer back to the default state.
 	 *
 	 * @param layerId ID of the layer
 	 */
-	function resetLayerAttributes(layerId: string): void
+	function resetLayerAttributes(layerId: LayerId): void
 
 	/**
 	 * Gets the currently selected Layers.
@@ -858,7 +858,7 @@ declare namespace api {
 	 * const childIds = api.getChildren(nullId);
 	 * console.log(childIds.length)
 	 */
-	function getChildren(layerId: string): string[]
+	function getChildren(layerId: LayerId): string[]
 
 	/**
 	 * Make one Layer the child of another.
@@ -871,7 +871,7 @@ declare namespace api {
 	 * const nullId = api.create("null", "My Null");
 	 * api.parent(primId, nullId);
 	 */
-	function parent(layerId: string, newParentId: string): void
+	function parent(layerId: LayerId, newParentId: string): void
 
 	/**
 	 * Return the `layerId` of a Layer's parent.
@@ -884,7 +884,7 @@ declare namespace api {
 	 * api.parent(primId, nullId);
 	 * console.log(api.getParent(primId));
 	 */
-	function getParent(layerId: string): string
+	function getParent(layerId: LayerId): string
 
 	/**
 	 * Return the human-readable ('nice name') of a Layer.
@@ -895,7 +895,7 @@ declare namespace api {
 	 * const nullId = api.create("null", "My Null");
 	 * console.log(api.getNiceName(nullId));
 	 */
-	function getNiceName(layerId: string): string
+	function getNiceName(layerId: LayerId): string
 
 	/**
 	 * Rename a Layer.
@@ -910,7 +910,7 @@ declare namespace api {
 	 *   api.rename(item, `My Name ${index}`)
 	 * })
 	 */
-	function rename(layerId: string, name: string): void
+	function rename(layerId: LayerId, name: string): void
 
 	/**
 	 * Offset a Layer's Visibility Clip and any related animation in time.
@@ -923,7 +923,7 @@ declare namespace api {
 	 * api.setOutFrame(layerId, 50);
 	 * api.offsetLayerTime(layerId, 100);
 	 */
-	function offsetLayerTime(layerId: string, delta: integer): void
+	function offsetLayerTime(layerId: LayerId, delta: integer): void
 
 	/**
 	 * Enable/disable the Stroke for a Shape.
@@ -937,7 +937,7 @@ declare namespace api {
 	 * api.setStroke(primId, true);
 	 * api.set(primId, { "stroke.strokeColor": "#049dd9", "stroke.width": 20 });
 	 */
-	function setStroke(layerId: string, enabled: boolean): void
+	function setStroke(layerId: LayerId, enabled: boolean): void
 
 	/**
 	 * Returns `true` if a Shape has a Stroke.
@@ -949,7 +949,7 @@ declare namespace api {
 	 * api.setStroke(primId, true);
 	 * console.log(api.hasStroke(primId));
 	 */
-	function hasStroke(layerId: string): boolean
+	function hasStroke(layerId: LayerId): boolean
 
 	/**
 	 * Enable/disable the Fill for a Shape.
@@ -962,7 +962,7 @@ declare namespace api {
 	 * api.setFill(primId, false);
 	 * api.setStroke(primId, true);
 	 */
-	function setFill(layerId: string, enabled: boolean): void
+	function setFill(layerId: LayerId, enabled: boolean): void
 
 	/**
 	 * Returns `true` if a Shape has a Fill.
@@ -973,7 +973,7 @@ declare namespace api {
 	 * const primId = api.primitive("rectangle", "Rectangle");
 	 * console.log(api.hasFill(primId));
 	 */
-	function hasFill(layerId: string): boolean
+	function hasFill(layerId: LayerId): boolean
 
 	/**
 	 * Gets the bounding box of the specified layer.
@@ -987,7 +987,7 @@ declare namespace api {
 	 * console.log(JSON.stringify(bbox));
 	 */
 	function getBoundingBox(
-		layerId: string,
+		layerId: LayerId,
 		worldSpace: boolean
 	): { x: float; y: float; width: float; height: float }
 
@@ -1030,7 +1030,7 @@ declare namespace api {
 	 * // Collapse the hierarchy of a layer
 	 * api.set("basicShape#1", { "hierarchy": false });
 	 */
-	function set(layerId: string, arguments: unknown): void
+	function set(layerId: LayerId, arguments: unknown): void
 
 	/**
 	 * Get the values for a Layer's attributes.
@@ -1051,7 +1051,7 @@ declare namespace api {
 	 */
 	// TODO: Return type depends on `attrId`
 	// TODO: Confirm the return type is `string | object`?
-	function get(layerId: string, attrId: string): unknown
+	function get(layerId: LayerId, attrId: string): unknown
 
 	/**
 	 * Some layers in Cavalry contain Generators, these are discrete feature
@@ -1081,7 +1081,7 @@ declare namespace api {
 	 * api.set(duplicatorId, { "generator.count": 10 });
 	 */
 	// TODO: Define allowed values for `type`
-	function setGenerator(layerId: string, attrId: string, type: string): void
+	function setGenerator(layerId: LayerId, attrId: string, type: string): void
 
 	/**
 	 * Some layers in Cavalry contain Generators, these are discrete feature
@@ -1099,7 +1099,7 @@ declare namespace api {
 	 *   console.log(id);
 	 * }
 	 */
-	function getGenerators(layerId: string): string[]
+	function getGenerators(layerId: LayerId): string[]
 
 	/**
 	 * Returns the current Generator type (which can be used with `setGenerator`).
@@ -1112,7 +1112,7 @@ declare namespace api {
 	 * const generatorType = api.getCurrentGeneratorType(ellipseId, 'generator')
 	 * console.log(generatorType)
 	 */
-	function getCurrentGeneratorType(layerId: string, attrId: string): string
+	function getCurrentGeneratorType(layerId: LayerId, attrId: string): string
 
 	/**
 	 * Set an attribute expression, this will take whatever the input value is
@@ -1147,7 +1147,7 @@ declare namespace api {
 	 * api.play();
 	 */
 	function setAttributeExpression(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		expression: string
 	): void
@@ -1172,9 +1172,9 @@ declare namespace api {
 	 * api.connect(pathfinderId, "id", textId, "position");
 	 */
 	function connect(
-		fromLayerId: string,
+		fromLayerId: LayerId,
 		fromAttrId: string,
-		toLayerId: string,
+		toLayerId: LayerId,
 		toAttrId: string
 	): void
 
@@ -1195,9 +1195,9 @@ declare namespace api {
 	 * console.log(api.getInConnection(primId, "rotation"));
 	 */
 	function disconnect(
-		fromLayerId: string,
+		fromLayerId: LayerId,
 		fromAttrId: string,
-		toLayerId: string,
+		toLayerId: LayerId,
 		toAttrId: string
 	): void
 
@@ -1210,7 +1210,7 @@ declare namespace api {
 	 * @example
 	 * api.disconnectInput("basicShape#1", "position.x");
 	 */
-	function disconnectInput(layerId: string, attrId: string): void
+	function disconnectInput(layerId: LayerId, attrId: string): void
 
 	/**
 	 * Disconnect all the output connections from an Attribute
@@ -1221,7 +1221,7 @@ declare namespace api {
 	 * @example
 	 * api.disconnectOutputs("basicShape#1", "position.x");
 	 */
-	function disconnectOutputs(layerId: string, attrId: string): void
+	function disconnectOutputs(layerId: LayerId, attrId: string): void
 
 	/**
 	 * Returns the input connection to an Attribute. An empty string is
@@ -1236,7 +1236,7 @@ declare namespace api {
 	 * api.connect(oscillatorId, "id", primId, "rotation");
 	 * console.log(api.getInConnection(primId, "rotation"));
 	 */
-	function getInConnection(layerId: string, attrId: string): string
+	function getInConnection(layerId: LayerId, attrId: string): string
 
 	/**
 	 * Returns all the output connections from an Attribute.
@@ -1251,7 +1251,7 @@ declare namespace api {
 	 * console.log(api.getOutConnections(oscillatorId, 'id'))
 	 */
 	// TODO: Also takes in `keyframeId`
-	function getOutConnections(layerId: string, attrId: string): string[]
+	function getOutConnections(layerId: LayerId, attrId: string): string[]
 
 	/**
 	 * This returns the selected keyframes as an enumerable string-keyed object.
@@ -1310,7 +1310,7 @@ declare namespace api {
 	 * api.keyframe(primId, 100, { "scale.x": 1 });
 	 */
 	function keyframe(
-		layerId: string,
+		layerId: LayerId,
 		frame: integer,
 		value: { [attrPath: string]: number }
 	): void
@@ -1331,7 +1331,7 @@ declare namespace api {
 	 */
 	// TODO: Confirm return type is correct
 	function deleteKeyframe(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		keyframe: integer
 	): void
@@ -1378,7 +1378,7 @@ declare namespace api {
 	 * }
 	 */
 	function modifyKeyframe(
-		layerId: string,
+		layerId: LayerId,
 		// TODO: Define as interface
 		// TODO: Incorrect, should be:
 		//  api.modifyKeyframe(ellipseId, {
@@ -1467,7 +1467,7 @@ declare namespace api {
 	 */
 	// TODO: Create interface for object
 	function modifyKeyframeTangent(
-		layerId: string,
+		layerId: LayerId,
 		data: {
 			frame: integer
 			inHandle?: boolean // An optional boolean value stating if you want the inHandle to be affected.
@@ -1493,7 +1493,7 @@ declare namespace api {
 	 * console.log(api.getKeyframeIdsForAttribute(primId, "position.x"));
 	 */
 	function getKeyframeIdsForAttribute(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string
 	): string[]
 
@@ -1538,7 +1538,7 @@ declare namespace api {
 	 * api.magicEasing("basicShape#1", "position.x", 25, "SlowIn");
 	 */
 	function magicEasing(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		frame: integer,
 		easingName: MagicEasing
@@ -1550,7 +1550,7 @@ declare namespace api {
 	 * @param layerId ID of the layer
 	 * @param attrId ID of the attribute
 	 */
-	function getKeyframeTimes(layerId: string, attrId: string): number[]
+	function getKeyframeTimes(layerId: LayerId, attrId: string): number[]
 
 	/**
 	 * Delete all keyframes on an attribute.
@@ -1558,7 +1558,7 @@ declare namespace api {
 	 * @param layerId ID of the layer
 	 * @param attrId ID of the attribute
 	 */
-	function deleteAnimation(layerId: string, attrId: string): void
+	function deleteAnimation(layerId: LayerId, attrId: string): void
 
 	type AttributeType =
 		| 'string'
@@ -1586,7 +1586,7 @@ declare namespace api {
 	 * api.addDynamic(layerId, "array", "string");
 	 * console.log(api.getAttrType(layerId, "array.1"));
 	 */
-	function getAttrType(layerId: string, attrId: string): AttributeType
+	function getAttrType(layerId: LayerId, attrId: string): AttributeType
 
 	/**
 	 * Reset an Attribute back to its default value.
@@ -1594,7 +1594,7 @@ declare namespace api {
 	 * @param layerId ID of the layer
 	 * @param attrId ID of the attribute
 	 */
-	function resetAttribute(layerId: string, attrId: string): void
+	function resetAttribute(layerId: LayerId, attrId: string): void
 
 	/**
 	 * TODO: Description
@@ -1609,7 +1609,7 @@ declare namespace api {
 	 * api.addArrayIndex(arrayId, "array")
 	 * api.set(arrayId, { "array.0": 10, "array.1": 20, "array.2": 30 });
 	 */
-	function addArrayIndex(layerId: string, attrId: string): integer
+	function addArrayIndex(layerId: LayerId, attrId: string): integer
 
 	/**
 	 * Remove an Attribute from an array
@@ -1617,7 +1617,7 @@ declare namespace api {
 	 * @param layerId ID of the layer
 	 * @param attrId ID of the attribute
 	 */
-	function removeArrayIndex(layerId: string, attrId: string): void
+	function removeArrayIndex(layerId: LayerId, attrId: string): void
 
 	/**
 	 * Return the number of Attributes in the array
@@ -1631,7 +1631,7 @@ declare namespace api {
 	 * api.addArrayIndex(arrayId, "array")
 	 * console.log(api.getArrayCount(arrayId, "array"));
 	 */
-	function getArrayCount(layerId: string, attrId: string): integer
+	function getArrayCount(layerId: LayerId, attrId: string): integer
 
 	// TODO: Define all available values
 	type Dynamic =
@@ -1676,7 +1676,7 @@ declare namespace api {
 	 * const value = api.get(layerId, "array.1");
 	 * console.log(value);
 	 */
-	function addDynamic(layerId: string, attrId: string, type: string): string
+	function addDynamic(layerId: LayerId, attrId: string, type: string): string
 
 	/**
 	 * Rename dynamic or array Attributes. Array Attributes can be found on the
@@ -1696,7 +1696,7 @@ declare namespace api {
 	 * console.log(outConn)
 	 */
 	function renameAttribute(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		newName: string
 	): void
@@ -1713,7 +1713,7 @@ declare namespace api {
 	 * const outConn = api.getOutConnectedAttributes(layer)
 	 * console.log(outConn)
 	 */
-	function getOutConnectedAttributes(layerId: string): string[]
+	function getOutConnectedAttributes(layerId: LayerId): string[]
 
 	/**
 	 * List the input connections to a Layer.
@@ -1727,7 +1727,7 @@ declare namespace api {
 	 * const inConn = api.getInConnectedAttributes(layer)
 	 * console.log(inConn)
 	 */
-	function getInConnectedAttributes(layerId: string): string[]
+	function getInConnectedAttributes(layerId: LayerId): string[]
 
 	/**
 	 * Return a list of all the attributes that exist on a Layer.
@@ -1741,7 +1741,7 @@ declare namespace api {
 	 *   console.log(id);
 	 * }
 	 */
-	function getAttributes(layerId: string): string[]
+	function getAttributes(layerId: LayerId): string[]
 
 	/**
 	 * Check to find out if a particular attribute exists on a Layer.
@@ -1754,7 +1754,7 @@ declare namespace api {
 	 * const attr = api.hasAttribute(layer, "position.x");
 	 * console.log(attr);
 	 */
-	function hasAttribute(layerId: string, attrId: string): boolean
+	function hasAttribute(layerId: LayerId, attrId: string): boolean
 
 	/**
 	 * Return a list of all the animated attributes that exist on a Layer.
@@ -1770,7 +1770,7 @@ declare namespace api {
 	 *   console.log(id);
 	 * }
 	 */
-	function getAnimatedAttributes(layerId: string): string[]
+	function getAnimatedAttributes(layerId: LayerId): string[]
 
 	/**
 	 * Check to find out if a particular attribute on a Layer is animated.
@@ -1784,7 +1784,7 @@ declare namespace api {
 	 * api.keyframe(layerId, 100, { "scale.x": 1 });
 	 * console.log(api.isAnimatedAttribute(layerId, "scale.x"));
 	 */
-	function isAnimatedAttribute(layerId: string, attrId: string): boolean
+	function isAnimatedAttribute(layerId: LayerId, attrId: string): boolean
 
 	/**
 	 * Return the first frame of a visibility clip.
@@ -1797,7 +1797,7 @@ declare namespace api {
 	 *   console.log(api.getInFrame(layerId));
 	 * }
 	 */
-	function getInFrame(layerId: string): integer
+	function getInFrame(layerId: LayerId): integer
 
 	/**
 	 * Set the first frame of a visibility clip.
@@ -1809,7 +1809,7 @@ declare namespace api {
 	 * const layerId = api.primitive("rectangle", "Rectangle");
 	 * api.setInFrame(layerId, 50);
 	 */
-	function setInFrame(layerId: string, frame: integer): void
+	function setInFrame(layerId: LayerId, frame: integer): void
 
 	/**
 	 * Return the last frame of a visibility clip.
@@ -1822,7 +1822,7 @@ declare namespace api {
 	 *   console.log(api.getOutFrame(layerId));
 	 * }
 	 */
-	function getOutFrame(layerId: string): integer
+	function getOutFrame(layerId: LayerId): integer
 
 	/**
 	 * Set the last frame of a visibility clip.
@@ -1834,7 +1834,7 @@ declare namespace api {
 	 * const layerId = api.primitive("rectangle", "Rectangle");
 	 * api.setOutFrame(layerId, 50);
 	 */
-	function setOutFrame(layerId: string, frame: integer): void
+	function setOutFrame(layerId: LayerId, frame: integer): void
 
 	/**
 	 * Sets a preset for a Graph Attribute. The `presetIndex` can be
@@ -1846,7 +1846,7 @@ declare namespace api {
 	 */
 	// TODO: Replace with enum once implemented
 	function graphPreset(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		presetIndex: 0 | 1 | 2 | 3
 	): void
@@ -1864,7 +1864,7 @@ declare namespace api {
 	 * api.flipGraph(staggerId, "graph", "vertical");
 	 */
 	function flipGraph(
-		layerId: string,
+		layerId: LayerId,
 		attrId: string,
 		direction: 'horizontal' | 'vertical'
 	): void
@@ -1879,7 +1879,7 @@ declare namespace api {
 	 * const shapeId = api.create("null", "My Null");
 	 * api.addToControlCentre(shapeId, "position.x");
 	 */
-	function addToControlCentre(layerId: string, attrId: string): void
+	function addToControlCentre(layerId: LayerId, attrId: string): void
 
 	/**
 	 * Remove an attribute from the Control Centre
@@ -1894,7 +1894,7 @@ declare namespace api {
 	 * // Then, assuming the null's LayerId is` null#1`, remove `position.x` from the Control Centre
 	 * api.removeFromControlCentre("null#1", "position.x");
 	 */
-	function removeFromControlCentre(layerId: string, attrId: string): void
+	function removeFromControlCentre(layerId: LayerId, attrId: string): void
 
 	// # Shapes
 
@@ -1905,7 +1905,7 @@ declare namespace api {
 	 * @param layerId ID of the layer
 	 * @param centroid Move to centre of mass
 	 */
-	function centrePivot(layerId: string, centroid: boolean): void
+	function centrePivot(layerId: LayerId, centroid: boolean): void
 
 	/**
 	 * Freeze the transform (position, rotation, scale, pivot, skew) of the
@@ -1914,14 +1914,14 @@ declare namespace api {
 	 *
 	 * @param layerId ID of the layer
 	 */
-	function freezeTransform(layerId: string): void
+	function freezeTransform(layerId: LayerId): void
 
 	/**
 	 * Reset a Shape's transform back to the default state (this will also clear
 	 * any frozen transformations).
 	 * @param layerId ID of the layer
 	 */
-	function resetTransform(layerId: string): void
+	function resetTransform(layerId: LayerId): void
 
 	/**
 	 * Copy the selected Shape(s) as code. The resulting code can be pasted into
@@ -1946,7 +1946,7 @@ declare namespace api {
 	 * const primId = api.primitive("ellipse", "Ellipse");
 	 * const editableId = api.makeEditable(primId, false);
 	 */
-	function makeEditable(layerId: string, makeACopy: boolean): string
+	function makeEditable(layerId: LayerId, makeACopy: boolean): string
 
 	/**
 	 * This function returns an `Editable Path` object which can be edited and
@@ -1989,7 +1989,7 @@ declare namespace api {
 	 */
 	// TODO: Create interface
 	function getEditablePath(
-		layerId: string,
+		layerId: LayerId,
 		worldSpace: boolean
 	): {
 		points: [
@@ -2057,7 +2057,7 @@ declare namespace api {
 	 * }
 	 */
 	function setEditablePath(
-		layerId: string,
+		layerId: LayerId,
 		worldSpace: boolean,
 		pathObject: cavalry.Path
 	): void
@@ -2068,7 +2068,7 @@ declare namespace api {
 	 *
 	 * @param layerId ID of the layer
 	 */
-	function makeFirstPoint(layerId: string): void
+	function makeFirstPoint(layerId: LayerId): void
 
 	/**
 	 * Move selected points by given X and Y values.
@@ -2213,7 +2213,7 @@ declare namespace api {
 	 * api.connectDynamicIndex(spreadsheetId, "rowIndex");
 	 * api.set(spreadsheetId, { "useFixedRow": true });
 	 */
-	function connectDynamicIndex(layerId: string, attrId: string): void
+	function connectDynamicIndex(layerId: LayerId, attrId: string): void
 
 	/**
 	 * Return the current Dynamic Index.
@@ -2468,7 +2468,7 @@ declare namespace api {
 	 * const compId = api.getCompFromReference(preCompId);
 	 * api.set(compId, { "niceName": "New Pre-Comp" });
 	 */
-	function getCompFromReference(layerId: string): string
+	function getCompFromReference(layerId: LayerId): string
 
 	/**
 	 * Create a Composition Reference from an existing Composition and add it
@@ -3266,7 +3266,7 @@ declare namespace api {
 	 * const primId = api.primitive("star", "Star");
 	 * api.setUserData(primId, "test", "Hello, World!");
 	 */
-	function setUserData(layerId: string, key: string, value: unknown): void
+	function setUserData(layerId: LayerId, key: string, value: unknown): void
 
 	// {@link TextDocument.uri TextDocument.uri.fsPath}
 	// {@linkcode Uri.scheme}
@@ -3295,7 +3295,7 @@ declare namespace api {
 	 * api.setUserData(primId, "test", "Hello, World!");
 	 * console.log(api.getUserDataKey(primId, "test"));
 	 */
-	function getUserDataKey(layerId: string, key: string): unknown
+	function getUserDataKey(layerId: LayerId, key: string): unknown
 
 	/**
 	 * Each layer in Cavalry has a unique identifier (a UUID). Layers based on
