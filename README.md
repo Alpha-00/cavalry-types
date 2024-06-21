@@ -2,7 +2,7 @@
 
 ## Disclaimer
 
-This is an unofficial folk project created for personal use only. It is not affiliated with, endorsed by, or supported by Scenery in any way.
+This is an unofficial folk project created for personal use only. It is not affiliated with, endorsed by, or supported by Scenery or Scene Group in any way.
 
 ### Use at Your Own Risk
 

@@ -1,4 +1,4 @@
-/// <reference path="./cavalry.d.ts" />
+/// <reference path="./index.d.ts" />
 // TODO Document #region for collapsable sections
 type integer = number
 type float = number
@@ -40,7 +40,7 @@ type float = number
  * ```
  * 
  * @see 
- * **Offical Documenation**
+ * **Official Documentation**
  * 
  * - [Cavalry Official Documentation of API Module](https://docs.cavalry.scenegroup.co/tech-info/scripting/api-module/)
  * 
@@ -58,7 +58,7 @@ declare namespace api {
 	/**
 	 * Move the playhead to a specific frame.
 	 *
-	 * @param  {interger} frame - The frame number of a composition
+	 * @param  {integer} frame - The frame number of a composition
 	 *
 	 * @example
 	 * // Move the playhead to frame 100
@@ -451,7 +451,7 @@ declare namespace api {
 	 */
 	type TimeMarkerId = `timeMarker#${number}${number | ''}${number | ''}`;
 
-	// TODO: Conflix with official doc
+	// TODO: Conflict with official doc
 	/**
 	 * Adds a new Time Marker. The second example sets up a Time Marker as a
 	 * controller for a Scheduling Group.
@@ -3076,7 +3076,7 @@ declare namespace api {
 	//  * var client = new api.WebClient("https://www.boredapi.com");
 	//  * // Send the Get Request (this returns a random activity to do if you're bored).
 	//  * client.get("/api/activity");
-	//  * // Check it succceded
+	//  * // Check it succeeded
 	//  * if (client.status() == 200) {
 	//  *   const obj = JSON.parse(client.body());
 	//  *   // Safety check, and print the activity
