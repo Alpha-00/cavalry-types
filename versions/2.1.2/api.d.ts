@@ -529,15 +529,16 @@ declare namespace api {
 	 * @see {@link LayerId} for more description
 	 */
 	type CompositionId = `compNode#${number}${number|''}${number|''}`
-	
+
+	// FIXME: Warn of Inconsistent return type compare to other API
 	/**
 	 * Add a Ruler Guide to the given Composition. This function returns an id
 	 * which can be used to delete the Guide later.
 	 *
-	 * Note that 0, 0 is the centre of the Composition.
+	 * **Note that 0, 0 is the centre of the Composition.**
 	 *
 	 * @param compId The ID of the composition
-	 * @param isVertical Is the guide vertical or not
+	 * @param isVertical Select X or Y axis for the guide, tells if it's a vertical or horizontal guide
 	 * @param position Position of the guide
 	 * @returns ID of the guide
 	 *
@@ -546,7 +547,7 @@ declare namespace api {
 	 * console.log(id);
 	 */
 	function addGuide(
-		compId: string,
+		compId: CompositionId,
 		isVertical: boolean,
 		position: integer
 	): integer
@@ -562,8 +563,9 @@ declare namespace api {
 	 * const id = api.addGuide(api.getActiveComp(), false, 100);
 	 * console.log(id);
 	 * api.deleteGuide(api.getActiveComp(), 1);
+	 * // If there is no Guide in the scene, there is no error.
 	 */
-	function deleteGuide(compId: string, id: integer): void
+	function deleteGuide(compId: CompositionId, id: integer): void
 
 	/**
 	 * Clear all Ruler Guides from the given Composition.
@@ -576,7 +578,7 @@ declare namespace api {
 	 * api.addGuide(api.getActiveComp(), false, 100);
 	 * api.clearGuides(api.getActiveComp());
 	 */
-	function clearGuides(compId: string): void
+	function clearGuides(compId: CompositionId): void
 
 	/**
 	 * Get the Ids of all the Ruler Guides in the given Composition.
