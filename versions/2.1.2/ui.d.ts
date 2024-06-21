@@ -1,3 +1,4 @@
+///<Reference path="index.d.ts"/>
 // You can build scripts with user interfaces (UIs) to make them easier to use or share with other people. Scripts with UIs can be tested from the JavaScript Editor and then saved to the file system meaning they can be opened as a Window and so docked and saved as part of a Workspace.
 
 // If your script has assets (for example images), you should place these inside a folder and give the folder the suffix _assets. Any directory ending with _assets will be hidden when navigating the Scripts menu.
@@ -306,7 +307,7 @@ declare namespace ui {
 	function setMinimumHeight(height: integer): void
 
 	/**
-	 * Set a maxmimum width for a UI window.
+	 * Set a maximum width for a UI window.
 	 *
 	 * Caution: Specifying a value could break a layout when docking a window.
 	 *
@@ -636,7 +637,7 @@ declare namespace ui {
 	function clearContextMenu(): void
 
 	/**
-	 * A callback functon that can be used to perform actions (e.g. remove
+	 * A callback function that can be used to perform actions (e.g. remove
 	 * temporary files) when closing the ui Window.
 	 *
 	 * @example
