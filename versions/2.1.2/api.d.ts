@@ -866,12 +866,15 @@ declare namespace api {
 	 * @param withInputConnections - if true, also duplicate input connections
 	 */
 	function duplicate(layerId:LayerId, withInputConnections:boolean): void
-	
+
 	/**
 	 * Gets the children of the specified layer.
 	 *
 	 * @param layerId ID of the layer
 	 *
+	 * @returns `LayerId[]` - array of unique identifier of layers.
+	 * Return empty list `[]` when layer have no child. 
+	 * 
 	 * @example
 	 * const primId = api.primitive("polygon", "My Polygon");
 	 * const nullId = api.create("null", "My Null");
@@ -879,7 +882,7 @@ declare namespace api {
 	 * const childIds = api.getChildren(nullId);
 	 * console.log(childIds.length)
 	 */
-	function getChildren(layerId: LayerId): string[]
+	function getChildren(layerId: LayerId): LayerId[]
 
 	/**
 	 * Make one Layer the child of another.
@@ -892,7 +895,7 @@ declare namespace api {
 	 * const nullId = api.create("null", "My Null");
 	 * api.parent(primId, nullId);
 	 */
-	function parent(layerId: LayerId, newParentId: string): void
+	function parent(layerId: LayerId, newParentId: LayerId): void
 
 	/**
 	 * Return the `layerId` of a Layer's parent.
