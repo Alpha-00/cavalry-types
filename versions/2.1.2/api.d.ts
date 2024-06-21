@@ -623,6 +623,34 @@ declare namespace api {
 	 */
 	function getGuideInfo(compId: CompositionId): GuideInfo[]
 
+	// TODO: Have limitation of not check if there is nothing behind the dot
+	/**
+	 * The unique identifier for an attribute of a layer.
+	 * It maybe use to set value or link to another attribute.
+	 * 
+	 * @example
+	 * "basicShape#1.x"
+	 * 
+	 * @see {@link LayerId} for more description
+	 */
+	type LayerAttributeId = `${LayerId}.${string}`
+
+	/**
+	 * Get a list of all the Attributes that have been added to the Control Centre.
+	 * 
+	 * Control Centre Window can be open in Window > Control Centre (Alt + E)
+	 * 
+	 * @param compId unique identifier of the composition
+	 * @returns `LayerAttributeId[]` - An array of attribute Id string
+	 * 
+	 * @example
+	 * console.log(api.getControlCentreAttributes(api.getActiveComp()));
+	 * 
+	 * @see
+	 * [Control Centre Official Documentation](https://docs.cavalry.scenegroup.co/user-interface/menus/window-menu/control-centre/)
+	 */
+	function getControlCentreAttributes(compId:CompositionId) : LayerAttributeId[]
+	
 	/**
 	 * The type of the primitive shape.
 	 * 
