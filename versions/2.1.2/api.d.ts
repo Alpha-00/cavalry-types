@@ -861,6 +861,13 @@ declare namespace api {
 	function invertSelection(): void
 
 	/**
+	 * Duplicate a Layer with an option to also duplicate any input connections.
+	 * @param layerId - ID of the layer
+	 * @param withInputConnections - if true, also duplicate input connections
+	 */
+	function duplicate(layerId:LayerId, withInputConnections:boolean): void
+	
+	/**
 	 * Gets the children of the specified layer.
 	 *
 	 * @param layerId ID of the layer
