@@ -651,6 +651,55 @@ declare namespace api {
 	 */
 	function getControlCentreAttributes(compId:CompositionId) : LayerAttributeId[]
 	
+	// TODO: Have limitation of number of timecode
+	/**
+	 * Represents a timecode following the format `hh:mm:ss:ff`.
+	 * 
+	 * - `hh`: Hours (unlimited integer) representing a duration equivalent to `hh * 3600 * fps`.
+	 * - `mm`: Minutes (unlimited integer) representing a duration equivalent to `mm * 60 * fps`.
+	 * - `ss`: Seconds (unlimited integer) representing a duration equivalent to `ss * fps`.
+	 * - `ff`: Frames (unlimited integer) representing a specific frame number within a second, independent of the frame rate (fps).
+	 *
+	 * This timecode format facilitates precise time selection within a timeline regardless of the underlying frame rate.
+	 *
+	 * @example
+	 * "00:00:06:05" represents 6 seconds and 5 frames.
+	 */
+	type TimeCode = `${number|""}${number|""}${number}:${number|""}${number|""}${number}:${number|""}${number|""}${number}:${number|""}${number|""}${number}`
+
+	/**
+	 * Converts a given frame number into an equivalent timecode based on a given frame rate. 
+	 * Note that a timecode starts at frame 0 regardless of the Frame Range set in the Composition Settings.
+	 * 
+	 * @param timecode - a string that represents a timecode
+	 * @param fps - frame rate, can be float or integer
+	 * @returns a rounded frame number
+	 * 
+	 * @example
+	 * console.log(api.timecodeToFrames("00:00:06:05",30));
+	 * // 185
+	 * 
+	 * @see {@link TimeCode} for formula to sum up timecode
+	 */
+	function timecodeToFrames(timecode:TimeCode, fps:number): integer
+
+	// FIXME return  00:00:03;02 have comma with value of 102.5,25.75
+	// TODO Conflict with documentation because of frame param type 
+	/**
+	 * Converts a given timecode into an equivalent frame number based on a given frame rate. 
+	 * Note that a timecode starts at frame 0 regardless of the Frame Range set in the Composition Settings.
+	 * 
+	 * @param frame - a frame number, can be float
+	 * @param fps - frame rate, can be float or integer
+	 * 
+	 * @example
+	 * console.log(api.framesToTimecode(100,25));
+	 * // 00:00:04:00
+	 * 
+	 * @see {@link TimeCode} for formula to sum up timecode
+	 */
+	function framesToTimecode(frame:number, fps:number): TimeCode
+
 	/**
 	 * The type of the primitive shape.
 	 * 
