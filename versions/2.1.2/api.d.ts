@@ -1135,7 +1135,28 @@ declare namespace api {
 	 * ```
 	 */
 	function getSelectionBoundingBox(): BoundingBoxInfo
+	// TODO: Start Checking here
+	/**
+	 * Determines if a Layer is visible in the Viewport. 
+	 * This considers the Layer's 'Hidden' attribute and the state of the Layer's Visibility Clip at the current frame. 
+	 * When the includeHierarchy argument is true, if the Layer is the child of another Layer, the visibility of that Layer (and its parent's and so on) is also considered.
+	 * 
+	 * @param layerId ID of the layer
+	 * @param includeHierarchy Include the visibility of the Layer's parent
+	 * @returns true` if the layer is visible, `false` if not
+	 * 
+	 * **Return `false` if the layerId is not exist**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const layerId = api.create("basicShape");
+	 * console.log(api.isVisible(layerId, false));
+	 * // true - because the layer is visible on created
+	 * ```
+	 */
+	function isVisible(layerId:LayerId, includeHierarchy:boolean): boolean
 
+	// TODO: Add 13 more function in the document here
 	/* #endRegion */
 
 	/* #region | MARK: Working with Attributes */
