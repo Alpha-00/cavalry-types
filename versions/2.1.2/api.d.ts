@@ -703,6 +703,8 @@ declare namespace api {
 
 	/* #endregion */
 
+	/* #region | MARK: Working with Layers */
+
 	/**
 	 * The type of the primitive shape.
 	 * 
@@ -786,6 +788,7 @@ declare namespace api {
 	 * Check if a layer with the given `layerId` exists.
 	 *
 	 * @param layerId ID of the layer
+	 * @returns `bool` true if the layer exists, false if not
 	 *
 	 * @example
 	 * const layerId = api.create('basicShape', 'Layer');
@@ -799,41 +802,52 @@ declare namespace api {
 	 * layer).
 	 *
 	 * @param layerId ID of the layer
+	 * @returns `LayerType` of a layer.
+	 * Represented as a string, which is a predefined set of values.
 	 *
 	 * @example
 	 * const layerId = api.create("null", "My Null");
 	 * console.log(api.getLayerType(layerId));
 	 */
-	function getLayerType(layerId: LayerId): string
+	function getLayerType(layerId: LayerId): LayerType
 
+	// TODO: Standardize the example
 	/**
 	 * Reset all Attributes on a layer back to the default state.
 	 *
 	 * @param layerId ID of the layer
+	 * 
+	 * @example
+	 * api.resetLayerAttributes("null#1");
+	 * // Only work if you have null layer is the first created layer
 	 */
 	function resetLayerAttributes(layerId: LayerId): void
 
 	/**
 	 * Gets the currently selected Layers.
 	 *
+	 * @returns `LayerId[]` - array of unique identifier of layers selected on screen
+	 * 
 	 * @example
 	 * const sel = api.getSelection();
 	 * for (let layer of sel) {
 	 *   console.log(api.getNiceName(layer));
 	 * }
 	 */
-	function getSelection(): string[]
+	function getSelection(): LayerId[]
 
 	/**
 	 * Sets the selected layers.
 	 *
 	 * @param selection Array of layer IDs
 	 *
+	 * **Not crash or warn if the layer ID is not exist**
+	 * 
 	 * @example
 	 * const primId = api.primitive("rectangle", "My Rectangle");
 	 * api.select([primId]);
 	 */
-	function select(layers: string[]): void
+	function select(layers: LayerId[]): void
 
 	/**
 	 * Deselect any selected Layers and select any deselected Layers.
