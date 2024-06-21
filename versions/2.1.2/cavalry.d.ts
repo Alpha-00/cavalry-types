@@ -1,3 +1,4 @@
+/// <reference path="./api.d.ts" />
 /**
  * This namespace gives access to the `Path` class, functions for creating noise and
  * random numbers along with a number of utilities to make working with color

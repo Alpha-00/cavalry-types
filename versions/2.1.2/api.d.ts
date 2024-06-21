@@ -1,3 +1,4 @@
+/// <reference path="./cavalry.d.ts" />
 // TODO Document #region for collapsable sections
 type integer = number
 type float = number
@@ -366,7 +367,8 @@ declare namespace api {
 	| "vortexModifier"
 	| "voxelize"
 	| "voxelizeDistribution"
-	| "wave"	
+	| "wave"
+	| Primitive
 		
 	// TODO: Limit of TypeScript to define id number: Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).
 	/**
@@ -601,6 +603,7 @@ declare namespace api {
 		 */
 		position: integer
 	}
+
 	/**
 	 * Get the Ids of all the Ruler Guides in the given Composition.
 	 *
@@ -609,6 +612,7 @@ declare namespace api {
 	 * - 1 for Vertical Guides
 	 *
 	 * @param compId ID of the composition
+	 * @return `GuideInfo[]` - An array of `GuideInfo` include Id, Direction and Position
 	 *
 	 * @example
 	 * const activeCompId = api.getActiveComp()
@@ -619,6 +623,11 @@ declare namespace api {
 	 */
 	function getGuideInfo(compId: CompositionId): GuideInfo[]
 
+	/**
+	 * The type of the primitive shape.
+	 * 
+	 * These can become generative layers for multiple shapes.
+	 */
 	type Primitive =
 		| 'rectangle'
 		| 'ellipse'
@@ -644,7 +653,7 @@ declare namespace api {
 	 * const primId = api.primitive("rectangle", "My Rectangle");
 	 * console.log(primId)
 	 */
-	function primitive(type: Primitive, name: string): string
+	function primitive(type: Primitive, name: string): LayerId
 
 	/**
 	 * Creates and Editable Shape from a Path
