@@ -1036,7 +1036,7 @@ declare namespace api {
 		 */
 		y: float;
 	}
-	
+
 	/**
 	 * Information of a Bounding Box
 	 * 
@@ -1117,7 +1117,25 @@ declare namespace api {
 	 */
 	function getBoundingBox(layerId: LayerId, worldSpace: boolean): BoundingBoxInfo
 
-	// # Working with Attributes
+	/**
+	 * Return the world space bounding box of the selected Layers.
+	 * 
+	 * @returns `BoundingBoxInfo` object of the box, include x, y, width, height, center, top, bottom, left, right
+	 * 
+	 * @example
+	 * const shape1 = api.create("basicShape");
+	 * api.set(shape1, {"position": [450, -120]});
+	 * const shape2 = api.create("basicShape");
+	 * api.set(shape2, {"position": [-100, 210]});
+	 * api.select([shape1, shape2]);
+	 * let bbox = api.getSelectionBoundingBox();
+	 * console.log(JSON.stringify(bbox));
+	 */
+	function getSelectionBoundingBox(): BoundingBoxInfo
+	
+	/* #endRegion */
+
+	/* #region | MARK: Working with Attributes */
 
 	/**
 	 * This will return an array containing the paths of the selected attributes.
