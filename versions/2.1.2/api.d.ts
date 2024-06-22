@@ -1156,7 +1156,249 @@ declare namespace api {
 	 */
 	function isVisible(layerId:LayerId, includeHierarchy:boolean): boolean
 
-	// TODO: Add 13 more function in the document here
+	/** 
+	 * Return the first frame of a visibility clip.
+	 * 
+	 * @param layerId ID of the layer
+	 * @returns `integer` frame index of the visibility clip
+	 * 
+	 * **Return 0 if the layerId is not exist**
+	 * 
+	 * @example
+	 * ```typescript
+	 * var sel = api.getSelection();
+	 * for (let layerId of sel) {
+	 *     console.log(api.getInFrame(layerId));
+	 * }
+	 * ```
+	*/
+	function getInFrame(layerId:LayerId): integer
+
+	/** 
+	 * Set the first frame of a visibility clip.
+	 * 
+	 * **Do not throw error if the layerId is not exist**
+	 * 
+	 * @param layerId ID of the layer
+	 * @param frame `integer` frame index of the visibility clip
+	 * 
+	 * ```typescript
+	 * const layerId = api.primitive("rectangle", "Rectangle");
+	 * api.setInFrame(layerId, 50);
+	 * ```
+	*/
+	function setInFrame(layerId:LayerId, frame:integer): void
+
+	/**
+	 * Return the last frame of a visibility clip.
+	 * 
+	 * @param layerId ID of the layer
+	 * @returns `integer` last frame index of the visibility clip
+	 * 
+	 * **Return last frame value (default is 249) if the layerId is not exist**
+	 * 
+	 * @example
+	 * ```typescript
+	 * var sel = api.getSelection();
+	 * for (let layerId of sel) {
+	 *     console.log(api.getOutFrame(layerId));
+	 * }
+	 * ```
+	 */
+	function getOutFrame(layerId:LayerId): integer
+
+	/** 
+	 * Set the last frame of a visibility clip.
+	 * 
+	 * @param layerId ID of the layer
+	 * @param frame `integer` last frame index of the visibility clip
+	 * 
+	 * **Do not throw error if the layerId is not exist**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const layerId = api.primitive("rectangle", "Rectangle");
+	 * api.setOutFrame(layerId, 50);
+	 * ```
+	*/
+	function setOutFrame(layerId:LayerId, frame:integer): void
+
+	/**
+	 * Unique identifier for a keyframe as a string.
+	 * 
+	 * Include user set keyframe, visibility keyframe, etc.
+	 * 
+	 * Usable to search for the specific frame with {@link getAttributeFromKeyframeId}
+	 * 
+	 * @example
+	 * "keyframe#123"
+	 * "keyframe#3"
+	 */
+	type KeyframeId = `keyframe#${number}`
+
+	/**
+	 * A pair of visible clip range
+	 */
+	type InOutKeyframeInfo = {
+		in: KeyframeId
+		out: KeyframeId
+	}
+
+	/** 
+	 * Returns an array of objects containing the keyframe ids of all the in and out points for a Layer.
+	 * 
+	 * It's about visibility range. Create an addition visible clip to have more pair results
+	 * 
+	 * @param layerId ID of the layer
+	 * @returns `InOutKeyframeInfo[]` an array of objects containing the keyframe ids of all the in and out points for a Layer
+	 * 
+	 * @example
+	 * ```typescript
+	 * const layer1 = api.create("basicShape");
+	 * const keyIds = api.getInOutKeyframeIds(layer1);
+	 * console.log(JSON.stringify(keyIds));
+	 * // Print: [{"in":"keyframe#1","out":"keyframe#2"}] 
+	 * // Or: [{"in":"keyframe#1","out":"keyframe#2"},{"in":"keyframe#4","out":"keyframe#5"}]
+	 * ``` 
+	*/
+	function getInOutKeyframeIds(layerId:LayerId): InOutKeyframeInfo[]
+
+	/**
+	 * Return the active Camera's Layer Id. 
+	 * A Camera is considered 'active' when its visibility is on at the current frame. 
+	 * Where more than one Camera is visible on the same frame, the Camera highest in the hierarchy is considered the active one.
+	 * 
+	 * @returns `LayerId` ID of the active Camera (e.g. `planarCamera#13`)
+	 * 
+	 * **If there is no Camera on scene, return empty string `''`**
+	 * 
+	 * @example
+	 * ```typescript
+	 * api.create("planarCamera");
+	 * console.log(api.getActiveCamera());
+	 * ```
+	 */
+	function getActiveCamera(): LayerId
+
+	/**
+	 * Return whether there is an active Camera in the active Composition. 
+	 * 
+	 * A Camera is considered 'active' when its visibility is on at the current frame.
+	 * 
+	 * @returns `boolean` `true` if there is an active Camera, `false` if not
+	 * 
+	 * **Return `false` if there is no Camera on scene**
+	 * 
+	 * @example
+	 * ```typescript
+	 * console.log(api.hasActiveCamera());
+	 * ```
+	 */
+	function hasActiveCamera(): boolean
+	
+	/**
+	 * Move the selected layers up the layer stack by one place.
+	 * 
+	 * **Do not throw error if no layer is selected**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const shape1 = api.create("basicShape", "Shape1");
+	 * const shape2 = api.create("basicShape", "Shape2");
+	 * api.select([shape1]);
+	 * api.bringForward();
+	 * ```
+	 * 
+	 * @see {@link select} to choose layers programmatically
+	 */
+	function bringForward(): undefined
+
+	/**
+	 * Move the selected layers to the top of the layer stack.
+	 * 
+	 * **Do not throw error if no layer is selected**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const shape1 = api.create("basicShape", "Shape1");
+	 * const shape2 = api.create("basicShape", "Shape2");
+	 * const shape3 = api.create("basicShape", "Shape3");
+	 * api.select([shape1]);
+	 * api.bringToFront();
+	 * ```
+	 * 
+	 * @see {@link select} to choose layers programmatically
+	 */
+	function bringToFront(): undefined
+
+	/**
+	 * Move the selected layers down the layer stack by one place.
+	 * 
+	 * **Do not throw error if no layer is selected**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const shape1 = api.create("basicShape", "Shape1");
+	 * const shape2 = api.create("basicShape", "Shape2");
+	 * api.select([shape2]);
+	 * api.moveBackward();
+	 * ```
+	 * 
+	 * @see {@link select} to choose layers programmatically
+	 */
+	function moveBackward(): undefined
+
+	/**
+	 * Move the selected layers to the bottom of the layer stack.
+	 * 
+	 * **Do not throw error if no layer is selected**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const shape1 = api.create("basicShape", "Shape1");
+	 * const shape2 = api.create("basicShape", "Shape2");
+	 * const shape3 = api.create("basicShape", "Shape3");
+	 * api.select([shape3]);
+	 * api.moveToBack();
+	 * ```
+	 * 
+	 * @see {@link select} to choose layers programmatically
+	 */
+	function moveToBack(): undefined
+
+	/**
+	 * Checks if a specified Layer is a Shape.
+	 * 
+	 * Shape Category include `backgroundShape`, `basicLine`, `svg`, `trail`, etc.
+	 * 
+	 * @param layerId ID of the layer
+	 * @returns `boolean` - `true` if the layer is a Shape, `false` if not
+	 * 
+	 * **Return `false` if the layerId is not exist**
+	 * 
+	 * @example
+	 * ```typescript
+	 * const shape1 = api.primitive("ellipse", "Ellipse");
+	 * console.log(api.isShape(shape1));
+	 * ```
+	 */
+	function isShape(layerId:LayerId): boolean
+
+	/**
+	 * Sets the editing mode for a Component.
+	 * 
+	 * @example
+	 * ```typescript
+	 * // Collapse a Component containing an Ellipse.
+	 * const ellipseId = api.primitive("ellipse", "Ellipse");
+	 * const componentId = api.create("component");
+	 * api.connect(ellipseId, "position", componentId, "promotedAttributes");
+	 * api.parent(ellipseId, componentId);
+	 * api.editComponent(componentId, false);
+	 * ```
+	 */
+	function editComponent(layerId:LayerId, editingMode:boolean): undefined
+	
 	/* #endRegion */
 
 	/* #region | MARK: Working with Attributes */
