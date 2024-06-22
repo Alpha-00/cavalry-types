@@ -3,8 +3,10 @@
  * This namespace gives access to the `Path` class, functions for creating noise and
  * random numbers along with a number of utilities to make working with color
  * easier, and, a whole host of maths functions such as `clamp`, `norm`, `map` and
- * `dist`. The methods are available to the JavaScript Utility, and the JavaScript
- * Editor. Everything in this namespace needs to be prefixed with `cavalry.`
+ * `dist`. The methods are available to the **Javascript Shape**, **JavaScript Utility**, 
+ * **Javascript Deformer** and the **JavaScript Editor**. 
+ * Everything in this namespace needs to be prefixed with `cavalry.`
+ * 
  *
  * @example
  * var distance = cavalry.dist(0, 0, 100, 200);
@@ -12,52 +14,203 @@
 declare namespace cavalry {
 	/**
 	 * Construct paths which can then be drawn on screen.
+	 * 
+	 * The Cavalry module contains a Path class which can be used to construct paths which can then be drawn on screen. 
+	 * Path itself contains several methods.
+	 * 
+	 * Several of these methods use the word 'param' or 'parameter'. 
+	 * This is a number between 0..1 which represents a progression along the curve's control cage from 0 (the beginning) to 1 (the end). 
+	 * The control cage, formed by the curve's control points, outlines the basic shape of the curve. 
+	 * Note that a 'param' value of 0.5 does not necessarily represent a position half way along the curve. 
+	 * This is because the relationship between the param value and the curve's length is not linear due to the influence of the curve's control points and its resulting shape. 
+	 * To convert length values into param values, use {@link paramAtLength}.
+	 * 
+	 * @example
+	 * ```typescript
+	 * var path = new cavalry.Path();
+	 * path.moveTo(0.,0.);
+	 * path.lineTo(0.,-100.);
+	 * path.lineTo(300.,-100.);
+	 * path.cubicTo(210., 110., 240., 140., 280., 260);
+	 * path.close();
+	 * path.translate(-300,-30);
+	 * path.addText("hello world", 274, -700, 300);
+	 * path.addRect(-300,-300,-200,-250);
+	 * path.addEllipse(250, -300, 100,60);
+	 * // this path can then be returned if on the JavaScript layer
+	 * // or used to create an Editable Shape like so
+	 * api.createEditable(path, "My Path");
+	 * ```
 	 */
 	class Path {
 		/**
-		 * Returns a boolean signifying if the path is closed.
+		 * Start a new contour
+		 * 
+		 * Create a point at exact position in local space.
+		 *
+		 * @param x horizontal coordinate.
+		 * @param y vertical coordinate
+		 * 
+		 * **Canvas origin is in object center at 0,0**
+		 * 
+		 * **Nothing visible except a new point in canvas**
+		 * 
+		 * @example
+		 * var path = new cavalry.Path();
+		 * path.moveTo(100,100);
+		 * // Add a point at top, right position
+		 * path.moveTo(100,100);
+		 * // Add one more point at the same location
+		 * path.moveTo(200,100);
+		 * // Add one more point to the right
 		 */
+		moveTo(x: number, y: number): void
+
+		/**
+		 * Draw a line to x, y
+		 *
+		 * @param x horizontal coordinate.
+		 * @param y vertical coordinate
+		 * 
+		 * **Canvas origin is in object center at 0,0**
+		 * 
+		 * **Auto create a point at the (0,0) if there is no previous point**
+		 * 
+		 * **Remember to turn on stroke setting to see the line in Javascript Shape**
+		 * 
+		 * @example
+		 * var path = new cavalry.Path();
+		 * path.lineTo(100,100);
+		 * // Create a line to the top right
+		 * path.lineTo(100,100);
+		 * // Add a line point to exact position
+		 * path.lineTo(200,100);
+		 * // Add a line point to the right
+		 */
+		lineTo(x: number, y: number): void
+
+		/**
+		 * Draw a cubic bezier with two control points, and an end point.
+		 * 
+		 *
+		 * @param cp1X Horizontal position of the 1st control point
+		 * @param cp1Y Vertical position of the 1st control point
+		 * 
+		 * @param cp2X Horizontal position of the 2nd control point
+		 * @param cp2Y Vertical position of the 2nd control point
+		 * 
+		 * @param endX Horizontal position of the end point
+		 * @param endY Vertical position of the end point
+		 * 
+		 * **Position of control point is exact on canvas. Not relative to according point**
+		 * 
+		 * **Auto create a point at the (0,0) if there is no previous point**
+		 * 
+		 * **Center of canvas is 0,0**
+		 * 
+		 * **Remember to turn on stroke setting to see the line in Javascript Shape**
+		 * 
+		 * @example
+		 * var path = new cavalry.Path();
+		 * path.cubicTo(100,100,200,200,300,300);
+		 * // Draw a straight line with 4 control points
+		 * path.cubicTo(100,100,200,200,100,300);
+		 * // Add a new curve line with 3 more control points, total 7 points
+		 * 
+		 * @description
+		 * We can evaluate the cubic with P0 to P3 is 4 point given using the following formula:
+		 * ```typescript
+		 * function cubicBezier(p0, p1, p2, p3, t) {
+		 *   const x = (1 - t) ** 3 * p0.x + 3 * (1 - t) ** 2 * t * p1.x + 3 * (1 - t) * t ** 2 * p2.x + t ** 3 * p3.x;
+		 *   const y = (1 - t) ** 3 * p0.y + 3 * (1 - t) ** 2 * t * p1.y + 3 * (1 - t) * t ** 2 * p2.y + t ** 3 * p3.y;
+		 *   return { x, y };
+		 * }
+		 * ```
+		 * 
+		 * Or simply using
+		 * 
+		 * ```typescript
+		 * var t = 0.5;
+		 * var path = new cavalry.Path();
+		 * path.cubicTo(100,100,200,200,300,300);
+		 * var positionAtParam = path.pointAtParam(t);
+		 * ```
+		 * 
+		 * We can find the approximate center point by given factor t = 0.5
+		 * 
+		 * But t = 0.5 is not necessarily the center point of the curve line.
+		 */
+		cubicTo(
+			cp1X: number, cp1Y: number,
+			cp2X: number, cp2Y: number,
+			endX: number, endY: number
+		): void
+
+		/**
+		 * Adds a conic to the path.
+		 * 
+		 * 
+		 * @param cp1X - Horizontal position of the 1st control point
+		 * @param cp1Y - Vertical position of the 1st control point
+		 * 
+		 * @param endX - Horizontal position of the end point
+		 * @param endY - Vertical position of the end point
+		 * @param weight - Weight of the curve.
+		 * 
+		 * - `= 1` - the curve is a quadratic Bézier curve 
+		 * (a conic with a weight of 1 is mathematically equivalent to a quadratic curve).
+	 	 * - `< 1` - the curve approximates an ellipse. 
+		 * The smaller the weight, the more the curve leans towards being circular, 
+		 * with smaller weights resulting in sharper curves.
+		 * - `> 0` - the curve begins to resemble a hyperbola. 
+		 * As the weight increases, the curve opens up more.
+		 * - `= 0` (or a very low value) - these may produce degenerate cases or curves that don't visually change much from a straight line or a very sharp curve.
+		 * 
+		 * @todo
+		 * TODO: Write Example
+		 * 
+		 * TODO: Write Warning
+		 * 
+		 * TODO: Write Formula Description
+		 */
+		conicTo(
+			cp1X:number, cp1Y:number, 
+			endX:number, endY:number, 
+			weight:number): void
+			
+		/**
+		 * Add a quadratic bézier curve to the path.
+		 * 
+		 * @param x1 - Horizontal position of the 1st control point
+		 * @param y1 - Vertical position of the 1st control point
+		 * 
+		 * @param x2 - Horizontal position of the 2nd control point
+		 * @param y2 - Vertical position of the 2nd control point
+		 * 
+		 * @todo
+		 * TODO: Write Example
+		 * 
+		 * TODO: Write Warning
+		 * 
+		 * TODO: Write Formula Description 
+		 * 
+		 * @see {@link conicTo} for exact the same curve with weight = 1
+		 */
+		quadTo(x1:number, y1:number, x2:number, y2:number)
+
+		/**
+		 * Returns a boolean signifying if the path is closed.
+		*/
 		readonly isClosed: boolean
 
 		/**
 		 * Returns the length of the path
 		 */
 		readonly length: float
+		
+		paramAtLength(lenght: number): number
+		
 
-		/**
-		 * Start a new contour
-		 *
-		 * @param x X coordinate
-		 * @param y Y coordinate
-		 */
-		moveTo(x: float, y: float): void
-
-		/**
-		 * Draw a line to x, y
-		 *
-		 * @param x X coordinate
-		 * @param y Y coordinate
-		 */
-		lineTo(x: float, y: float): void
-
-		/**
-		 * Draw a cubic bezier with two control points, and an end point.
-		 *
-		 * @param cp1X X position of the 1st control point
-		 * @param cp1Y Y position of the 1st control point
-		 * @param cp2X X position of the 2nd control point
-		 * @param cp2Y Y position of the 2nd control point
-		 * @param endX X position of the end point
-		 * @param endY Y position of the end point
-		 */
-		cubicTo(
-			cp1X: float,
-			cp1Y: float,
-			cp2X: float,
-			cp2Y: float,
-			endX: float,
-			endY: float
-		): void
 
 		/**
 		 * Draw an arc with two control points and a radius
