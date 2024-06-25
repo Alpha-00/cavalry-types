@@ -1402,17 +1402,70 @@ declare namespace api {
 	/* #endRegion */
 
 	/* #region | MARK: Working with Attributes */
-
+	type AttributeName = string
 	/**
 	 * This will return an array containing the paths of the selected attributes.
 	 *
 	 * @example
+	 * ```typescript
 	 * const selAttr = api.getSelectedAttributes();
 	 * for (const [layerId, attr] of selAttr) {
 	 *   console.log(`${layerId}.${attr}`);
 	 * }
+	 * ```
+	 * basicShape#1.skew 
+	 * basicShape#1.scale 
+	 * basicShape#1.opacity 
+	 * basicShape#1.blendMode 
+	 * basicShape#1.deformers 
 	 */
-	function getSelectedAttributes(): [string, string][]
+	function getSelectedAttributes(): [LayerId, AttributeName][]
+	
+	// TODO: Current name is from Javascript Shape, please try to rename it
+	/**
+	 * An array of x and y coordinate of a point
+	 * 
+	 * @example
+	 * var p1 : Point2dTurple = [0, 0];
+	 */
+	type Double2 = [x: float, y: float]
+
+	// TODO: Current name is from Javascript Shape, please try to rename it
+	/**
+	 * An array of x and y and z coordinate of a point
+	 * 
+	 * @example
+	 * var p1 : Point2dTurple = [0, 0];
+	 */
+	type Double3 = [x: float, y: float, z: float]
+
+	// TODO: Consider using: type RegexMatchedString<Pattern extends RegExp> = string & { __regexPattern: Pattern };
+	/**
+	 * String represent a color by using r,g,b hex
+	 * 
+	 * **Hex character is include 0-9; a-f (or A-F)**
+	 * 
+	 * @example
+	 * var color : ColorHex = "#123456"
+	 */
+	type ColorHex = `#${string}`
+	
+	// TODO: Prepare all type for argument
+	// type ArgumentsObjectType =  string | number | boolean | Double2 | Double3 | ArgumentsObject | ColorHex;
+	type ArgumentsObjectType = any;
+
+	/**
+	 * Represent a custom object that could hold many attributes
+	 * 
+	 * @example
+	 * var obj : ArgumentsObject = {
+	 * 		"generator.dimensions": [100,370],
+	 * 		"position": [100, 200],
+	 * 		"rotation": 50,
+	 * 		"material.materialColor": "#8dc429"		 
+	 * }
+	 */
+	type AttributesObject = { [key: string]: ArgumentsObjectType }
 
 	/**
 	 * Set values for a Layer's attributes.
@@ -1440,13 +1493,15 @@ declare namespace api {
 	 * // Collapse the hierarchy of a layer
 	 * api.set("basicShape#1", { "hierarchy": false });
 	 */
-	function set(layerId: LayerId, arguments: unknown): void
+	function set(layerId: LayerId, arguments: AttributesObject): void
 
+	// TODO: Return type depends on `attrId`
+	// TODO: Confirm the return type is `string | object`?
 	/**
 	 * Get the values for a Layer's attributes.
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrId name of the attribute
 	 *
 	 * @example
 	 * const primId = api.primitive("rectangle", "My Rectangle");
@@ -1459,9 +1514,8 @@ declare namespace api {
 	 * const obj = api.get(primId, "position");
 	 * console.log(JSON.stringify(obj))
 	 */
-	// TODO: Return type depends on `attrId`
-	// TODO: Confirm the return type is `string | object`?
 	function get(layerId: LayerId, attrId: string): unknown
+	// 
 
 	/**
 	 * Some layers in Cavalry contain Generators, these are discrete feature

@@ -196,7 +196,33 @@ declare namespace cavalry {
 		 * 
 		 * @see {@link conicTo} for exact the same curve with weight = 1
 		 */
-		quadTo(x1:number, y1:number, x2:number, y2:number)
+		quadTo(
+			x1:number, y1:number, 
+			x2:number, y2:number): void
+
+		/**
+		 * Convert any conic verbs to quad verbs. 
+		 * 
+		 * This might be useful as not all features in Cavalry support conic verbs.
+		 * 
+		 * @todo
+		 * TODO: Write Example
+		 * 
+		 * TODO: Write Warning
+		 * - Create a lot of new point to reconstruct the path
+		 */
+		convertConicsToQuads(): void
+
+		/**
+ 		* Close the path
+		* 
+		* @todo
+		* TODO: Write Example
+		* 
+		* TODO: Write Warning
+		* - Create no new point
+ 		*/
+		close(): void
 
 		/**
 		 * Returns a boolean signifying if the path is closed.
@@ -222,11 +248,6 @@ declare namespace cavalry {
 		 * @param radius Distance from arc to circle center
 		 */
 		arcTo(x1: float, y1: float, x2: float, y2: float, radius: float): void
-
-		/**
-		 * Close the path
-		 */
-		close(): void
 
 		/**
 		 * Add text to the path and position it. The text could be added to a
