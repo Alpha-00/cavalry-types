@@ -1497,6 +1497,7 @@ declare namespace api {
 
 	// TODO: Return type depends on `attrId`
 	// TODO: Confirm the return type is `string | object`?
+	// TODO: Consider using attrPath or attributeName instead of ID because it's not unique
 	/**
 	 * Get the values for a Layer's attributes.
 	 *
@@ -1514,8 +1515,8 @@ declare namespace api {
 	 * const obj = api.get(primId, "position");
 	 * console.log(JSON.stringify(obj))
 	 */
-	function get(layerId: LayerId, attrId: string): unknown
-	// 
+	function get(layerId: LayerId, attrPath: string): unknown
+	//number | string | object | undefined
 
 	/**
 	 * Some layers in Cavalry contain Generators, these are discrete feature
