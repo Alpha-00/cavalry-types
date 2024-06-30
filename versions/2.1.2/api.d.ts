@@ -97,6 +97,7 @@ declare namespace api {
 	function play(): void
 
 	// TODO: Check the number of layer type and double check with the documentation
+	// TODO: Divide into Particle Modifer, Util, Effect, etc
 	/**
 	 * Using for create or sort layer
 	 * 
@@ -117,215 +118,99 @@ declare namespace api {
 	 * Effects include Shaders and image based Filters. 
 	 */
 	type LayerType =
-		| "3dMatrix"
 		| "accumulator"
-		| "addDivisions"
-		| "align"
 		| "animationControl"
 		| "applyCharacterSpacing"
-		| "applyDistribution"
 		| "applyFontSize"
-		| "applyLayout"
 		| "applyTextFill"
 		| "applyTypeface"
-		| "areaRange"
-		| "arrayDistribution"
 		| "assetArray"
 		| "assetFromSmartFolder"
 		| "attractorField"
-		| "autoAnimate"
-		| "autoCrop"
-		| "backgroundBlurFilter"
-		| "backgroundShape"
-		| "basicLine"
-		| "basicShape"
-		| "behaviourMixer"
-		| "bend"
-		| "bevel"
 		| "blackAndWhite"
 		| "blendShader"
-		| "blendShape"
-		| "blendSubMeshPositions"
-		| "blurFilter"
 		| "bodySettingCollisionEvent"
-		| "boolean"
 		| "boundingBox"
 		| "boundingBoxConstraint"
 		| "bridgeConstraint"
 		| "brightnessAndContrast"
-		| "celAnimationShape"
 		| "checkerboardShader"
-		| "chopPath"
-		| "chromaticAberrationFilter"
-		| "circleDistribution"
-		| "cleanUp"
 		| "colorArray"
-		| "colorBlend"
 		| "colorCollisionEvent"
 		| "colorInfo"
 		| "colorMaterial"
 		| "colorShader"
 		| "compConstraint"
 		| "comparison"
-		| "component"
 		| "componentConstraint"
-		| "connectShape"
 		| "contextIndex"
 		| "contrastingColor"
-		| "convexHull"
-		| "cornerPinShape"
 		| "countSubMeshes"
 		| "crtScanLines"
-		| "curvesToLines"
-		| "customDistribution"
-		| "customShape"
 		| "dataModifier"
 		| "directionField"
-		| "distance"
 		| "distanceConstraint"
-		| "distortionFilter"
 		| "distributionEmitter"
-		| "ditheringFilter"
 		| "dragField"
-		| "dropShadowFilter"
-		| "duplicator"
 		| "edgeDetection"
-		| "editableShape"
-		| "extrude"
 		| "falloff"
-		| "fibonacciDistribution"
 		| "fill"
-		| "fillRule"
-		| "flare"
-		| "flattenShapeLayers"
 		| "flowFieldModifier"
 		| "forceModifier"
-		| "forgeDynamicsShape"
-		| "frame"
-		| "gammaCorrectionFilter"
 		| "getLayerName"
 		| "getSubMeshTransform"
-		| "getVector"
-		| "glowFilter"
 		| "goalModifier"
-		| "gradientMapFilter"
 		| "gradientShader"
-		| "gridDistribution"
-		| "gridLayoutGroup"
-		| "gridLayoutRow"
-		| "group"
-		| "halftoneFilter"
-		| "hsvAdjustmentFilter"
 		| "hsvColor"
 		| "ifElse"
 		| "imageModifier"
 		| "imageSampler"
 		| "imageShader"
-		| "imageToShapes"
 		| "impulseCollisionEvent"
 		| "indexToColor"
-		| "innerShadowFilter"
-		| "intersectionDistribution"
 		| "invert"
-		| "isWithin"
 		| "javaScript"
-		| "javaScriptDeformer"
 		| "javaScriptEmitter"
 		| "javaScriptModifier"
-		| "javaScriptShape"
 		| "jsmath"
-		| "layoutGroup"
 		| "lengthContext"
-		| "linearDistribution"
 		| "linearWipe"
 		| "localTime"
 		| "logic"
-		| "lookAt"
 		| "magneticModifier"
-		| "manipulator"
-		| "maskDistribution"
-		| "materialBehaviourAlpha"
-		| "materialBehaviourColor"
-		| "materialBehaviourHSV"
-		| "materialBehaviourSwapColor"
-		| "materialSampler"
 		| "math"
 		| "math2"
-		| "mathDistribution"
 		| "measure"
 		| "measureText"
-		| "mergeShape"
 		| "meshArray"
-		| "meshDistribution"
-		| "mirrorFilter"
-		| "modulate"
-		| "morph"
-		| "motionStretch"
 		| "multiPointGradientShader"
-		| "noise"
 		| "noiseShader"
 		| "null"
-		| "numberRange"
-		| "numberRangeToColor"
-		| "oscillator"
-		| "outline"
-		| "particleDistribution"
 		| "particleEmitter"
-		| "particleShape"
-		| "pathDistribution"
 		| "pathLength"
 		| "pathModifier"
-		| "pathOffsetBehaviour"
-		| "pathfinder"
 		| "pinConstraint"
-		| "pinch"
-		| "pixelSortingFilter"
-		| "pixelateFilter"
 		| "planarCamera"
-		| "pointDistribution"
 		| "pointsToCurve"
-		| "positionBlend"
-		| "posterizeFilter"
-		| "pushAlongVector"
 		| "quadTreeShape"
 		| "radialWipe"
 		| "radius"
-		| "random"
-		| "randomDistribution"
 		| "rayLine"
 		| "rectPatternShape"
-		| "resamplePath"
-		| "reversePathUtility"
-		| "rgbSplitFilter"
 		| "rigControl"
-		| "roseDistribution"
-		| "round"
-		| "rubberHoseLimb"
 		| "schedulingGroup"
-		| "scrapeFilter"
 		| "segmentPath"
 		| "sequence"
 		| "shaderArray"
-		| "shapeEdgeDistribution"
-		| "shapePointDistribution"
-		| "sharpenFilter"
 		| "shiftChannels"
 		| "shortestPath"
-		| "shuffleDistribution"
 		| "simpleValue2Solver"
 		| "simpleValueSolver"
-		| "skew"
 		| "skslShader"
-		| "slitScanFilter"
-		| "sortDistribution"
-		| "sound"
 		| "spacerItem"
 		| "speedModifier"
 		| "spreadsheet"
 		| "spreadsheetLookup"
-		| "spring"
-		| "squashAndStretch"
-		| "stagger"
 		| "stickyCollisionEvent"
 		| "string"
 		| "stringArray"
@@ -335,44 +220,190 @@ declare namespace api {
 		| "stringManipulator"
 		| "strokeMaterial"
 		| "subBoundingBox"
-		| "subMesh"
-		| "subdivide"
 		| "svgShape"
 		| "textShape"
-		| "thresholdFilter"
 		| "timelineCounter"
 		| "trails"
 		| "transformConstraint"
-		| "transformDistribution"
-		| "travel"
-		| "triToneFilter"
 		| "turbulenceModifier"
 		| "typeface"
 		| "typefaceArray"
-		| "value"
-		| "value2"
 		| "value2Array"
-		| "value2Blend"
-		| "value3"
 		| "value3Array"
-		| "value3Blend"
 		| "valueArray"
-		| "valueBlend"
 		| "velocityContext"
 		| "velocityMagnitudeContext"
 		| "venetianBlinds"
-		| "vignetteFilter"
-		| "visibility"
 		| "visibilityCollisionEvent"
 		| "visualModifier"
 		| "voronoiShader"
 		| "vortexModifier"
-		| "voxelize"
-		| "voxelizeDistribution"
-		| "wave"
 		| PrimitiveType
+		| DistributionGeneratorType
+		| BasicMaterialType
+		| FilterLayerType
+		| ShapeLayerType
+		
+		type ShapeLayerType =
+		| "backgroundShape"
+		| "basicLine"
+		| "basicShape"
+		| "celAnimationShape"
+		| "component"
+		| "connectShape"
+		| "convexHull"
+		| "cornerPinShape"
+		| "customShape"
+		| "duplicator"
+		| "editableShape"
+		| "extractSubMeshes" // 2.1.2		
+		| "extrude"
+		| "forgeDynamicsShape"
+		| "gridLayoutGroup"
+		| "gridLayoutRow"
+		| "group"
+		| "imageToShapes"
+		| "javaScriptShape"
+		| "layoutGroup"
+		| "mergeShape"
+		| "outline"
+		| "particleShape"
 
-	// TODO: Limit of TypeScript to define id number: Due to technical constraints of TypeScript, the current implementation restricts layer IDs to a maximum of three digits (0-999).
+
+		type BehaviorLayerType = 
+		| "areaRange"
+		| "behaviourMixer"
+		| "colorBlend"
+		| "distance"
+		| "frame"
+		| "getVector"
+		| "isWithin"
+		| "lookAt"
+		| "materialBehaviourAlpha"
+		| "materialBehaviourColor"
+		| "materialBehaviourHSV"
+		| "materialBehaviourSwapColor"
+		| "materialSampler"
+		| "modulate"
+		| "numberRange"
+		| "numberRangeToColor"
+		| "positionBlend"
+		| "stagger"
+		| "value"
+		| "value2"
+		| "value2Blend"
+		| "value3"
+		| "value3Blend"
+		| "valueBlend"
+		| "visibility"
+		| DeformerLayerType
+		
+	type DeformerLayerType =
+	| "3dMatrix"
+	| "addDivisions"
+	| "align"
+	| "applyDistribution"
+	| "applyLayout"
+	| "autoAnimate"
+	| "autoCrop"
+	| "bend"
+	| "bevel"
+	| "blendShape"
+	| "blendSubMeshPositions"
+	| "boolean"
+	| "chopPath"
+	| "cleanUp"
+	| "curvesToLines"
+	| "extendOpenPaths" // 2.1.2
+	| "fillRule"
+	| "flare"
+	| "flattenShapeLayers"
+	| "javaScriptDeformer"
+	| "manipulator"
+	| "morph"
+	| "motionStretch"
+	| "noise"
+	| "oscillator"
+	| "pathOffsetBehaviour"
+	| "pathfinder"
+	| "pinch"
+	| "pushAlongVector"
+	| "random"
+	| "resamplePath"
+	| "reversePathUtility"
+	| "round"
+	| "rubberHoseLimb"
+	| "skew"
+	| "sound"
+	| "spring"
+	| "squashAndStretch"
+	| "subMesh"
+	| "subdivide"
+	| "travel"
+	| "voxelize"
+	| "wave"
+
+
+	type FilterLayerType =
+	| "backgroundBlurFilter"
+	| "blurFilter"
+	| "chromaticAberrationFilter"
+	| "distortionFilter"
+	| "ditheringFilter"
+	| "dropShadowFilter"
+	| "gammaCorrectionFilter"
+	| "glowFilter"
+	| "gradientMapFilter"
+	| "halftoneFilter"
+	| "hsvAdjustmentFilter"
+	| "innerShadowFilter"
+	| "mirrorFilter"
+	| "pixelSortingFilter"
+	| "pixelateFilter"
+	| "posterizeFilter"
+	| "rgbSplitFilter"
+	| "scrapeFilter"
+	| "sharpenFilter"
+	| "slitScanFilter"
+	| "thresholdFilter"
+	| "triToneFilter"
+	| "vignetteFilter"
+
+	type BasicMaterialType =
+		| FillMaterialType // Default Fill
+		| StrokeMaterialType // Default Stroke
+	type FillMaterialType =
+		|"colorMaterial" // Default Fill
+	type StrokeMaterialType =
+		|"strokeMaterial" // Default Fill
+		/**
+		 * Generator for Duplicator Layer, Connect Shape Layer
+		 */
+	type DistributionGeneratorType = 
+		| "arrayDistribution"
+		| "circleDistribution"
+		| "customDistribution"
+		| "fibonacciDistribution"
+		| "gridDistribution"
+		| "intersectionDistribution"
+		| "linearDistribution"
+		| "maskDistribution"
+		| "mathDistribution"
+		| "meshDistribution"
+		| "particleDistribution"
+		| "pathDistribution"
+		| "pointDistribution"
+		| "randomDistribution"
+		| "roseDistribution"
+		| "shapeEdgeDistribution"
+		| "shapePointDistribution"
+		| "shuffleDistribution"
+		| "sortDistribution"
+		| "transformDistribution"
+		| "voxelizeDistribution"
+	type ForgeBodyAuxiliaryType =
+		| "forgeBodyAuxiliary"
+
 	/**
 	 * 
 	 * A unique identifier for a layer as a string.
@@ -392,7 +423,7 @@ declare namespace api {
 	 * - "addDivisions#789"
 	 * 
 	 */
-	type LayerId = `${LayerType}#${number}${number | ''}${number | ''}`;
+	type LayerId = `${LayerType}#${number}`;
 
 	/**
 	 * Return all the Layers in the active Composition of a certain type.
@@ -440,7 +471,6 @@ declare namespace api {
 	 */
 	function getCompLayersOfType(topLevel: boolean, type: LayerType): LayerId[]
 
-	// TODO: Limit of TypeScript to define id number
 	/**
 	 * A unique identifier for a Time Marker.
 	 * 
@@ -451,7 +481,7 @@ declare namespace api {
 	 * 
 	 * @see {@link LayerId} for more description
 	 */
-	type TimeMarkerId = `timeMarker#${number}${number | ''}${number | ''}`;
+	type TimeMarkerId = `timeMarker#${number}`;
 
 	// TODO: Conflict with official doc
 	/**
@@ -532,7 +562,7 @@ declare namespace api {
 	 * 
 	 * @see {@link LayerId} for more description
 	 */
-	type CompositionId = `compNode#${number}${number | ''}${number | ''}`
+	type CompositionId = `compNode#${number}`
 
 	// FIXME: Warn of Inconsistent return type compare to other API
 	/**
@@ -653,7 +683,6 @@ declare namespace api {
 	 */
 	function getControlCentreAttributes(compId: CompositionId): LayerAttributeId[]
 
-	// TODO: Have limitation of number of timecode
 	/**
 	 * Represents a timecode following the format `hh:mm:ss:ff`.
 	 * 
@@ -667,7 +696,7 @@ declare namespace api {
 	 * @example
 	 * "00:00:06:05" represents 6 seconds and 5 frames.
 	 */
-	type TimeCode = `${number | ""}${number | ""}${number}:${number | ""}${number | ""}${number}:${number | ""}${number | ""}${number}:${number | ""}${number | ""}${number}`
+	type TimeCode = `${number}:${number}:${number}:${number}`
 
 	/**
 	 * Converts a given frame number into an equivalent timecode based on a given frame rate. 
@@ -1474,6 +1503,7 @@ declare namespace api {
 	 * @param arguments Object of attribute names and values
 	 *
 	 * @example
+	 * ```typescript
 	 * // Create a Rectangle and set its Size, Position, Rotation and Fill Color
 	 * const primId = api.primitive("rectangle", "My Rectangle");
 	 * api.set(primId, {
@@ -1482,6 +1512,9 @@ declare namespace api {
 	 * 	"rotation": 50,
 	 * 	"material.materialColor": "#8dc429"
 	 * });
+	 * ```
+	 * 
+	 * ```typescript
 	 * // Create a Text Shape and set its Font Family and Style
 	 * const textId = api.create("textShape", "My Text");
 	 * api.set(textId, {
@@ -1490,8 +1523,12 @@ declare namespace api {
 	 *     "style": "Bold"
 	 *   }
 	 * });
+	 * ```
+	 * 
+	 * ```typescript
 	 * // Collapse the hierarchy of a layer
 	 * api.set("basicShape#1", { "hierarchy": false });
+	 * ```
 	 */
 	function set(layerId: LayerId, arguments: AttributesObject): void
 
@@ -1500,11 +1537,14 @@ declare namespace api {
 	// TODO: Consider using attrPath or attributeName instead of ID because it's not unique
 	/**
 	 * Get the values for a Layer's attributes.
+	 * 
+	 * **Not working with Attribute from Generator
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId name of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
+	 * ```typescript
 	 * const primId = api.primitive("rectangle", "My Rectangle");
 	 * api.set(primId, {
 	 *   "material.materialColor": "#8dc429",
@@ -1513,7 +1553,10 @@ declare namespace api {
 	 *   "position": [100, 200]
 	 * });
 	 * const obj = api.get(primId, "position");
-	 * console.log(JSON.stringify(obj))
+	 * console.log(JSON.stringify(obj));
+	 * ```
+	 * 
+	 * @see {@link getGenerators} for attribute of generator
 	 */
 	function get(layerId: LayerId, attrPath: string): unknown
 	//number | string | object | undefined
@@ -1525,10 +1568,11 @@ declare namespace api {
 	 * (e.g Ellipse, Rectangle, etc). You can set Generators with this function.
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 * @param type Generator type
 	 *
 	 * @example
+	 * ```typescript
 	 * // Create an Ellipse and set it up
 	 * const ellipseId = api.primitive("ellipse", "Ellipse");
 	 * api.set(ellipseId, {
@@ -1544,9 +1588,19 @@ declare namespace api {
 	 * api.setGenerator(duplicatorId, "generator", "circleDistribution");
 	 * // Set the Distribution count
 	 * api.set(duplicatorId, { "generator.count": 10 });
+	 * ```
+	 * 
+	 * @see {@link getGenerators} for attribute path available to set
+	 * @see {@link getCurrentGenerator} for current `type` value of the generator which is usual have id of the generator. For example: `gridDistribution#2`
+	 * @see {@link getCurrentGeneratorType} for current `type` of the generator, which is just `gridDistribution` 
+	 * @see {@link PrimitiveType} for list of primitive `generator` for basicShape layer
+	 * @see {@link FillMaterialType} for list of fill `material` types
+	 * @see {@link StrokeMaterialType} for list of `stroke` material types
+	 * @see {@link DistributionGeneratorType} for list of distribution `generator` type of Duplicator Layer. Or in `sourceGenerator` and `targetGenerator` of Connect Shape
+	 * @see {@link ForgeBodyAuxiliaryType} for list of `shape.[shape index].auxiliary` types using in Forge Body Shape
 	 */
 	// TODO: Define allowed values for `type`
-	function setGenerator(layerId: LayerId, attrId: string, type: string): void
+	function setGenerator(layerId: LayerId, attrPath: string, type: string): void
 
 	/**
 	 * Some layers in Cavalry contain Generators, these are discrete feature
@@ -1556,28 +1610,51 @@ declare namespace api {
 	 * this command.
 	 *
 	 * @param layerId ID of the layer
+	 * @returns `string[]` List of generator Attribute Path
 	 *
 	 * @example
+	 * ```typescript
 	 * const layerId = api.create("connectShape", "Connect Shape");
 	 * const generatorId = api.getGenerators(layerId);
 	 * for (id of generatorId) {
 	 *   console.log(id);
 	 * }
+	 * ```
 	 */
 	function getGenerators(layerId: LayerId): string[]
 
 	/**
-	 * Returns the current Generator type (which can be used with `setGenerator`).
+	* Returns the generatorId for an attribute on a Layer or empty if there isn't one.
+	*
+	* @param layerId - ID of the layer
+	* @param attrPath name or path to the attribute
+	*
+	* @returns `string​` of unique identifier for the generator currently used for the attribute
+	*
+	* @example
+	* ```typescript
+	* var duplicatorId = api.create("duplicator", "Duplicator");
+	* console.log(api.getCurrentGenerator(duplicatorId, "generator"));
+	* ```
+	* 
+	* @see {@link setGenerator} for setting the generator
+	* @see {@link getGenerators} for list of generator path available
+	*/
+	function getCurrentGenerator(layerId: string, attrPath: string): string​
+
+	/**
+	 * Returns the current Generator type (which can be used with {@link setGenerator}).
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
 	 * const ellipseId = api.primitive("ellipse", "My Ellipse")
 	 * const generatorType = api.getCurrentGeneratorType(ellipseId, 'generator')
 	 * console.log(generatorType)
+	 * 
 	 */
-	function getCurrentGeneratorType(layerId: LayerId, attrId: string): string
+	function getCurrentGeneratorType(layerId: LayerId, attrPath: string): string
 
 	/**
 	 * Set an attribute expression, this will take whatever the input value is
@@ -1590,7 +1667,7 @@ declare namespace api {
 	 * to be set on the `x` or `y` axis of the attribute.
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 * @param expression Expression to apply to the attribute
 	 *
 	 * @example
@@ -1610,10 +1687,13 @@ declare namespace api {
 	 * api.set(oscillatorId, {"strength": 1500});
 	 * api.connect(oscillatorId, "id", starId, "position.y");
 	 * api.play();
+	 * 
+	 * @see 
+	 * [Javascript Math Cheat Sheet](https://htmlcheatsheet.com/js/) for available functions
 	 */
 	function setAttributeExpression(
 		layerId: LayerId,
-		attrId: string,
+		attrPath: string,
 		expression: string
 	): void
 
@@ -1622,9 +1702,9 @@ declare namespace api {
 	 * referred to as the `in` connection.
 	 *
 	 * @param fromLayerId ID of the sending layer
-	 * @param fromAttrId ID of the sending attribute
+	 * @param fromAttrPath name or path to the sending attribute
 	 * @param toLayerId ID of the receiving layer
-	 * @param toAttrId ID of the receiving attribute
+	 * @param toAttrPath name or path to the receiving attribute
 	 *
 	 * @example
 	 * const textId = api.create("textShape", "Text");
@@ -1638,18 +1718,18 @@ declare namespace api {
 	 */
 	function connect(
 		fromLayerId: LayerId,
-		fromAttrId: string,
+		fromAttrPath: string,
 		toLayerId: LayerId,
-		toAttrId: string
+		toAttrPath: string
 	): void
 
 	/**
 	 * Remove connections between attributes.
 	 *
 	 * @param fromLayerId ID of the sending layer
-	 * @param fromAttrId ID of the sending attribute
+	 * @param fromAttrPath name or path to the sending attribute
 	 * @param toLayerId ID of the receiving layer
-	 * @param toAttrId ID of the receiving attribute
+	 * @param toAttrPath name or path to the receiving attribute
 	 *
 	 * @example
 	 * const primId = api.primitive("rectangle", "Rectangle");
@@ -1661,16 +1741,16 @@ declare namespace api {
 	 */
 	function disconnect(
 		fromLayerId: LayerId,
-		fromAttrId: string,
+		fromAttrPath: string,
 		toLayerId: LayerId,
-		toAttrId: string
+		toAttrPath: string
 	): void
 
 	/**
 	 * Disconnect an Attribute's input connection
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
 	 * api.disconnectInput("basicShape#1", "position.x");
@@ -1681,19 +1761,19 @@ declare namespace api {
 	 * Disconnect all the output connections from an Attribute
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
 	 * api.disconnectOutputs("basicShape#1", "position.x");
 	 */
-	function disconnectOutputs(layerId: LayerId, attrId: string): void
+	function disconnectOutputs(layerId: LayerId, attrPath: string): void
 
 	/**
 	 * Returns the input connection to an Attribute. An empty string is
 	 * returned if there's no input on the Attribute in question.
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
 	 * const primId = api.primitive("rectangle", "Rectangle");
@@ -1701,66 +1781,39 @@ declare namespace api {
 	 * api.connect(oscillatorId, "id", primId, "rotation");
 	 * console.log(api.getInConnection(primId, "rotation"));
 	 */
-	function getInConnection(layerId: LayerId, attrId: string): string
+	function getInConnection(layerId: LayerId, attrPath: string): string
 
 	/**
 	 * Returns all the output connections from an Attribute.
 	 *
 	 * @param layerId ID of the layer
-	 * @param attrId ID of the attribute
+	 * @param attrPath name or path to the attribute
 	 *
 	 * @example
+	 * ```typescript
 	 * const primId = api.primitive('rectangle', 'Rectangle')
 	 * const oscillatorId = api.create('oscillator', 'Oscillator')
 	 * api.connect(oscillatorId, 'id', primId, 'rotation')
 	 * console.log(api.getOutConnections(oscillatorId, 'id'))
+	 * ```
 	 */
 	// TODO: Also takes in `keyframeId`
-	function getOutConnections(layerId: LayerId, attrId: string): string[]
-
+	function getOutConnections(layerId: LayerId, attrPath: string): string[]
+	
 	/**
 	 * This returns the selected keyframes as an enumerable string-keyed object.
 	 * Each string is an attribute path, and each key is an array of frame
 	 * numbers on which a keyframe resides.
 	 *
 	 * @example
+	 * ```typescript
 	 * const selKeys = api.getSelectedKeyframes();
 	 * for (const [key, value] of Object.entries(selKeys)) {
 	 *   console.log(`${key}: ${value}`);
 	 * }
+	 * ```
 	 */
-	function getSelectedKeyframes(): { [key: string]: integer[] }
-
-	/**
-	 * Set the keyframe selection. To clear the keyframe selection send an empty
-	 * array through.
-	 *
-	 * @param keyframeIds Array of keyframe IDs to be selected
-	 *
-	 * @example
-	 * // Create a Shape and add some keyframes to scale.x
-	 * const primId = api.primitive("rectangle", "My Rectangle");
-	 * api.keyframe(primId, 0, { "scale.x": 4 });
-	 * api.keyframe(primId, 50, { "scale.x": 3 });
-	 * api.keyframe(primId, 100, { "scale.x": 1 });
-	 * console.log(api.getKeyframeIdsForAttribute(primId, "scale.x"));
-	 * // Select the first and third keyframes
-	 * api.setSelectedKeyframeIds(["keyframe#3", "keyframe#5"]);
-	 */
-	function setSelectedKeyframeIds(keyframeIds: string[]): void
-
-	/**
-	 * Get the attribute path for a given keyframe.
-	 *
-	 * @param keyframeId ID of the keyframe
-	 *
-	 * @example
-	 * const keyIds = api.getSelectedKeyframeIds();
-	 * for (const keyId of keyIds) {
-	 *     console.log(api.getAttributeFromKeyframeId(keyId))
-	 * }
-	 */
-	function getAttributeFromKeyframeId(keyframeId: string): string
+	function getSelectedKeyframes(): { [key: LayerAttributeId]: integer[] }
 
 	/**
 	 * Set keyframes for Layers.
@@ -1970,6 +2023,37 @@ declare namespace api {
 	 * console.log(api.getSelectedKeyframeIds());
 	 */
 	function getSelectedKeyframeIds(): string[]
+
+	/**
+	 * Set the keyframe selection. To clear the keyframe selection send an empty
+	 * array through.
+	 *
+	 * @param keyframeIds Array of keyframe IDs to be selected
+	 *
+	 * @example
+	 * // Create a Shape and add some keyframes to scale.x
+	 * const primId = api.primitive("rectangle", "My Rectangle");
+	 * api.keyframe(primId, 0, { "scale.x": 4 });
+	 * api.keyframe(primId, 50, { "scale.x": 3 });
+	 * api.keyframe(primId, 100, { "scale.x": 1 });
+	 * console.log(api.getKeyframeIdsForAttribute(primId, "scale.x"));
+	 * // Select the first and third keyframes
+	 * api.setSelectedKeyframeIds(["keyframe#3", "keyframe#5"]);
+	 */
+	function setSelectedKeyframeIds(keyframeIds: KeyframeId[]): void
+
+	/**
+	 * Get the attribute path for a given keyframe.
+	 *
+	 * @param keyframeId ID of the keyframe
+	 *
+	 * @example
+	 * const keyIds = api.getSelectedKeyframeIds();
+	 * for (const keyId of keyIds) {
+	 *     console.log(api.getAttributeFromKeyframeId(keyId))
+	 * }
+	 */
+	function getAttributeFromKeyframeId(keyframeId: KeyframeId): LayerAttributeId
 
 	type MagicEasing =
 		| 'SlowIn'
